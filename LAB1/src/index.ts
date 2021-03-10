@@ -28,6 +28,12 @@ class Statystyka{
 const startapp= new StartApp(document.body);
 */
 
+const header = document.createElement('h1');
+header.innerHTML="Hellow WORLD";
+document.body.appendChild(header);
+
+
+/*
 let value1:string;
 let value2:string;
 let value3:string;
@@ -53,3 +59,4 @@ const output=document.createElement('h1');
 output.innerText=String(sumaInput);
 
 console.log(sumaInput);
+*/
