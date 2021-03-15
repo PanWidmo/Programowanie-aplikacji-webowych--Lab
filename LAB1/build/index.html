@@ -11,17 +11,18 @@
 </head>
 <body>
     <div class="inputData">
-        <input type="text" id="data1">
-        <input type="text" id="data2">
-        <input type="text" id="data3">
-        <input type="text" id="data4">
+        <label>Type number of input fields:</label>
+        <input type="text" id="numberOfInputs" placeholder="Number">
+        <button type="button" onclick="createInput()">Add</button> </br>
+
+        <div id="inputsContainer">
+
+        </div>
     </div>
 
+
     <div class="statsData">
-        <input type="text" id="sum">
-        <input type="text" id="avg">
-        <input type="text" id="min">
-        <input type="text" id="max">
+        <input type="text" id="sum" placeholder="Sum">
     </div>
 
     <script src='index.js'></script>
