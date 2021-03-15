@@ -1,62 +1,63 @@
-/*
-class StartApp{
-    containerDomElement: Element;
+class StatsApp{
 
-    constructor(containerDOMElement : Element){
-        if(!containerDOMElement){
-            throw new Error ("musisz podac pojemnik dla programy StartApp");
-        }
-        this.containerDomElement=containerDOMElement;
-        this.stworzUI();
+    data1Input:HTMLInputElement;
+    data2Input:HTMLInputElement;
+    data3Input:HTMLInputElement;
+    data4Input:HTMLInputElement;
+    sumInput:HTMLInputElement;
+    avgInput:HTMLInputElement;
+    minInput:HTMLInputElement;
+    maxInput:HTMLInputElement;
+
+    constructor(){
+        this.startApp();
     }
 
-    startApp():void{
-        this.ui=new UIEvent(this.containerDomElement);
-        this.stats = new Statystyka();
+    startApp(){
+        this.getInputs();
+        this.watchInputValues();
     }
+
+    getInputs(){
+        this.data1Input=document.querySelector('#data1');
+        this.data2Input=document.querySelector('#data2');
+        this.data3Input=document.querySelector('#data3');
+        this.data4Input=document.querySelector('#data4');
+        this.sumInput=document.querySelector('#sum');
+        this.avgInput=document.querySelector('#avg');
+        this.minInput=document.querySelector('#min');
+        this.maxInput=document.querySelector('#max');
+    }
+
+    watchInputValues(){
+        this.data1Input.addEventListener('input',()=>this.computeData());
+        this.data2Input.addEventListener('input',()=>this.computeData());
+        this.data3Input.addEventListener('input',()=>this.computeData());
+        this.data4Input.addEventListener('input',()=>this.computeData());
+    }
+
+    computeData(){
+        const data1=+this.data1Input.value;
+        const data2=+this.data2Input.value;
+        const data3=+this.data3Input.value;
+        const data4=+this.data4Input.value;
+
+        const sum=data1+data2+data3+data4;
+        const avg=sum/4;
+        const min= Math.min(data1,data2,data3,data4);
+        const max= Math.max(data1,data2,data3,data4);
+        this.showStats(sum,avg,min,max);
+    }
+
+    showStats(sum:number,avg:number,min:number,max:number){
+        this.sumInput.value=sum.toString();
+        this.avgInput.value=avg.toString();
+        this.minInput.value=min.toString();
+        this.maxInput.value=max.toString();
+    }
+
+    
+
 }
 
-
-class UI{
-//wyswietla
-}
-
-class Statystyka{
-//liczy
-}
-
-const startapp= new StartApp(document.body);
-*/
-
-const header = document.createElement('h1');
-header.innerHTML="Hellow WORLD";
-document.body.appendChild(header);
-
-
-/*
-let value1:string;
-let value2:string;
-let value3:string;
-let value4:string;
-
-const w1 = document.querySelector('input1');
-const w2 = document.querySelector('#input2');
-const w3 = document.querySelector('#input3');
-const w4 = document.querySelector('#input4');
-
-value1=(w1 as HTMLInputElement).value;
-value2=(w2 as HTMLInputElement).value;
-value3=(w3 as HTMLInputElement).value;
-value4=(w4 as HTMLInputElement).value;
-
-function suma(a:number,b:number,c:number,d:number){
-    return a+b+c+d;
-}
-
-let sumaInput= suma(parseInt(value1),parseInt(value2),parseInt(value3),parseInt(value4));
-
-const output=document.createElement('h1');
-output.innerText=String(sumaInput);
-
-console.log(sumaInput);
-*/
+const statsApp= new StatsApp();

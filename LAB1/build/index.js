@@ -1,59 +1,45 @@
-/*
-class StartApp{
-    containerDomElement: Element;
-
-    constructor(containerDOMElement : Element){
-        if(!containerDOMElement){
-            throw new Error ("musisz podac pojemnik dla programy StartApp");
-        }
-        this.containerDomElement=containerDOMElement;
-        this.stworzUI();
+var StatsApp = /** @class */ (function () {
+    function StatsApp() {
+        this.startApp();
     }
-
-    startApp():void{
-        this.ui=new UIEvent(this.containerDomElement);
-        this.stats = new Statystyka();
-    }
-}
-
-
-class UI{
-//wyswietla
-}
-
-class Statystyka{
-//liczy
-}
-
-const startapp= new StartApp(document.body);
-*/
-var header = document.createElement('h1');
-header.innerHTML = "Hellow WORLD";
-document.body.appendChild(header);
-/*
-let value1:string;
-let value2:string;
-let value3:string;
-let value4:string;
-
-const w1 = document.querySelector('input1');
-const w2 = document.querySelector('#input2');
-const w3 = document.querySelector('#input3');
-const w4 = document.querySelector('#input4');
-
-value1=(w1 as HTMLInputElement).value;
-value2=(w2 as HTMLInputElement).value;
-value3=(w3 as HTMLInputElement).value;
-value4=(w4 as HTMLInputElement).value;
-
-function suma(a:number,b:number,c:number,d:number){
-    return a+b+c+d;
-}
-
-let sumaInput= suma(parseInt(value1),parseInt(value2),parseInt(value3),parseInt(value4));
-
-const output=document.createElement('h1');
-output.innerText=String(sumaInput);
-
-console.log(sumaInput);
-*/ 
+    StatsApp.prototype.startApp = function () {
+        this.getInputs();
+        this.watchInputValues();
+    };
+    StatsApp.prototype.getInputs = function () {
+        this.data1Input = document.querySelector('#data1');
+        this.data2Input = document.querySelector('#data2');
+        this.data3Input = document.querySelector('#data3');
+        this.data4Input = document.querySelector('#data4');
+        this.sumInput = document.querySelector('#sum');
+        this.avgInput = document.querySelector('#avg');
+        this.minInput = document.querySelector('#min');
+        this.maxInput = document.querySelector('#max');
+    };
+    StatsApp.prototype.watchInputValues = function () {
+        var _this = this;
+        this.data1Input.addEventListener('input', function () { return _this.computeData(); });
+        this.data2Input.addEventListener('input', function () { return _this.computeData(); });
+        this.data3Input.addEventListener('input', function () { return _this.computeData(); });
+        this.data4Input.addEventListener('input', function () { return _this.computeData(); });
+    };
+    StatsApp.prototype.computeData = function () {
+        var data1 = +this.data1Input.value;
+        var data2 = +this.data2Input.value;
+        var data3 = +this.data3Input.value;
+        var data4 = +this.data4Input.value;
+        var sum = data1 + data2 + data3 + data4;
+        var avg = sum / 4;
+        var min = Math.min(data1, data2, data3, data4);
+        var max = Math.max(data1, data2, data3, data4);
+        this.showStats(sum, avg, min, max);
+    };
+    StatsApp.prototype.showStats = function (sum, avg, min, max) {
+        this.sumInput.value = sum.toString();
+        this.avgInput.value = avg.toString();
+        this.minInput.value = min.toString();
+        this.maxInput.value = max.toString();
+    };
+    return StatsApp;
+}());
+var statsApp = new StatsApp();
