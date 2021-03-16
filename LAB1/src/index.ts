@@ -2,7 +2,6 @@ class StatsApp{
 
     numberOfInputs:HTMLInputElement;
     inputsContainer: HTMLElement;
-    button: HTMLElement;
     dataArray: HTMLInputElement[]=[];
     dataSumInput:HTMLInputElement;
     dataAvgInput:HTMLInputElement;
@@ -15,9 +14,6 @@ class StatsApp{
 
     startApp(){
         this.numberOfInputs = document.querySelector("#numberOfInputs");
-        this.button = document.getElementById("button");
-        this.button.addEventListener("click", () => this.createInput());
-
         this.getInputs();
         this.watchInputValues();
     }
@@ -46,6 +42,7 @@ class StatsApp{
             removeInputButton.textContent = "Remove";
             removeInputButton.className = "data" + (i + 1);
             this.inputsContainer.appendChild(removeInputButton);
+            removeInputButton.addEventListener('click', ()=> this.removeInput(i+1));
 
             const brake = document.createElement("br");
             brake.className = "data" + (i + 1);
@@ -54,6 +51,14 @@ class StatsApp{
         }
         this.startApp();
       }
+
+    removeInput(n:number){
+       for(let i=0;i<4;i++){
+       const d=document.querySelector('.data'+n);
+       d.remove();
+       }
+       this.dataArray.splice(n-1,1);
+    }
 
     getInputs(){
         this.inputsContainer = document.getElementById("inputsContainer");

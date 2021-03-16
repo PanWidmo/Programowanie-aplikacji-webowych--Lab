@@ -4,39 +4,50 @@ var StatsApp = /** @class */ (function () {
         this.startApp();
     }
     StatsApp.prototype.startApp = function () {
-        var _this = this;
         this.numberOfInputs = document.querySelector("#numberOfInputs");
-        this.button = document.getElementById("button");
-        this.button.addEventListener("click", function () { return _this.createInput(); });
         this.getInputs();
         this.watchInputValues();
     };
     StatsApp.prototype.createInput = function () {
+        var _this = this;
         var _a, _b, _c;
         this.inputsContainer = document.getElementById("inputsContainer");
         var number = +this.numberOfInputs.value;
         while ((_a = this.inputsContainer) === null || _a === void 0 ? void 0 : _a.hasChildNodes()) {
             (_b = this.inputsContainer) === null || _b === void 0 ? void 0 : _b.removeChild((_c = this.inputsContainer) === null || _c === void 0 ? void 0 : _c.lastChild);
         }
-        for (var i = 0; i < number; i++) {
+        var _loop_1 = function (i) {
             var newInputLabel = document.createElement("label");
             newInputLabel.innerHTML = "Value: ";
             newInputLabel.setAttribute("class", "data" + (i + 1));
-            this.inputsContainer.appendChild(newInputLabel);
+            this_1.inputsContainer.appendChild(newInputLabel);
             var newInput = document.createElement("input");
             newInput.setAttribute("type", "text");
             newInput.setAttribute("class", "data" + (i + 1));
             newInput.setAttribute("id", "input" + (i + 1));
-            this.inputsContainer.appendChild(newInput);
+            this_1.inputsContainer.appendChild(newInput);
             var removeInputButton = document.createElement("button");
             removeInputButton.textContent = "Remove";
             removeInputButton.className = "data" + (i + 1);
-            this.inputsContainer.appendChild(removeInputButton);
+            this_1.inputsContainer.appendChild(removeInputButton);
+            removeInputButton.addEventListener('click', function () { return _this.removeInput(i + 1); });
             var brake = document.createElement("br");
             brake.className = "data" + (i + 1);
-            this.inputsContainer.appendChild(brake);
+            this_1.inputsContainer.appendChild(brake);
+        };
+        var this_1 = this;
+        for (var i = 0; i < number; i++) {
+            _loop_1(i);
         }
         this.startApp();
+    };
+    StatsApp.prototype.removeInput = function (n) {
+        for (var i = 0; i < 4; i++) {
+            var d = document.querySelector('.data' + n);
+            d.remove();
+        }
+        this.dataArray.splice(n - 1, 1);
+        this.dataArray.splice(n, 1);
     };
     StatsApp.prototype.getInputs = function () {
         this.inputsContainer = document.getElementById("inputsContainer");
