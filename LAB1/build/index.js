@@ -5,11 +5,11 @@ var StatsApp = /** @class */ (function () {
     }
     StatsApp.prototype.startApp = function () {
         var _this = this;
-        //this.watchInputValues();
         this.numberOfInputs = document.querySelector("#numberOfInputs");
         this.button = document.getElementById("button");
         this.button.addEventListener("click", function () { return _this.createInput(); });
         this.getInputs();
+        this.watchInputValues();
     };
     StatsApp.prototype.createInput = function () {
         var _a, _b, _c;
@@ -26,6 +26,7 @@ var StatsApp = /** @class */ (function () {
             var newInput = document.createElement("input");
             newInput.setAttribute("type", "text");
             newInput.setAttribute("class", "data" + (i + 1));
+            newInput.setAttribute("id", "input" + (i + 1));
             this.inputsContainer.appendChild(newInput);
             var removeInputButton = document.createElement("button");
             removeInputButton.textContent = "Remove";
@@ -42,7 +43,7 @@ var StatsApp = /** @class */ (function () {
         if (this.inputsContainer.hasChildNodes()) {
             var number = +this.numberOfInputs.value;
             for (var i = 0; i < number; i++) {
-                var data = ".data" + (i + 1);
+                var data = "#input" + (i + 1);
                 this.dataArray.push(document.querySelector(data));
             }
         }
@@ -50,6 +51,36 @@ var StatsApp = /** @class */ (function () {
         this.dataAvgInput = document.querySelector('#avgInput');
         this.dataMinInput = document.querySelector('#minInput');
         this.dataMaxInput = document.querySelector('#maxInput');
+    };
+    StatsApp.prototype.computeData = function () {
+        var dataArray2 = [];
+        var sum = 0;
+        var number = +this.numberOfInputs.value;
+        for (var i = 0; i < number; i++) {
+            dataArray2[i] = +this.dataArray[i].value;
+            sum += dataArray2[i];
+        }
+        var avg = sum / number;
+        var max = Math.max.apply(Math, dataArray2);
+        var min = Math.min.apply(Math, dataArray2);
+        this.showStats(sum, avg, min, max);
+    };
+    StatsApp.prototype.showStats = function (sum, avg, min, max) {
+        this.dataSumInput.value = sum.toString();
+        this.dataAvgInput.value = avg.toString();
+        this.dataMinInput.value = min.toString();
+        this.dataMaxInput.value = max.toString();
+    };
+    StatsApp.prototype.watchInputValues = function () {
+        var _this = this;
+        var _a;
+        var number = +this.numberOfInputs.value;
+        this.numberOfInputs.addEventListener('input', function () { return _this.createInput(); });
+        if (this.inputsContainer.hasChildNodes()) {
+            for (var i = 0; i < number; i++) {
+                (_a = this.dataArray[i]) === null || _a === void 0 ? void 0 : _a.addEventListener('input', function () { return _this.computeData(); });
+            }
+        }
     };
     return StatsApp;
 }());

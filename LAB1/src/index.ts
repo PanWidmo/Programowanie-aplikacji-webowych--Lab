@@ -9,19 +9,17 @@ class StatsApp{
     dataMinInput:HTMLInputElement;
     dataMaxInput:HTMLInputElement;
 
-    data1Input:HTMLInputElement;
-    sumInput:HTMLInputElement;
-
     constructor(){
         this.startApp();
     }
 
     startApp(){
-        //this.watchInputValues();
         this.numberOfInputs = document.querySelector("#numberOfInputs");
         this.button = document.getElementById("button");
         this.button.addEventListener("click", () => this.createInput());
+
         this.getInputs();
+        this.watchInputValues();
     }
 
     createInput() {
@@ -41,6 +39,7 @@ class StatsApp{
             const newInput = document.createElement("input");
              newInput.setAttribute("type", "text");
             newInput.setAttribute("class", "data" + (i + 1));
+            newInput.setAttribute("id","input"+(i+1));
             this.inputsContainer.appendChild(newInput);
 
             const removeInputButton = document.createElement("button");
@@ -63,7 +62,7 @@ class StatsApp{
             const number = +this.numberOfInputs.value;
 
             for(let i=0; i<number; i++){
-                const data =".data"+(i+1);
+                const data ="#input"+(i+1);
 
                 this.dataArray.push(document.querySelector(data));
             }
@@ -75,21 +74,42 @@ class StatsApp{
         this.dataMaxInput=document.querySelector('#maxInput');
     }
 
-/*
-    watchInputValues(){
-        this.data1Input.addEventListener('input',()=>this.computeData());
-    }
-
     computeData(){
-        const data1=+this.data1Input.value;
 
-        const sum=data1//+data2;
+        const dataArray2:number[]=[];
+        let sum:number=0;
+        const number = +this.numberOfInputs.value;
+
+        for(let i=0;i<number;i++){
+            dataArray2[i]=+this.dataArray[i].value;
+            sum+=dataArray2[i];
+        }
+
+        const avg = sum/number;
+        const max = Math.max.apply(Math, dataArray2);
+        const min = Math.min.apply(Math, dataArray2);
+
+        this.showStats(sum, avg, min, max);
     }
 
-    showStats(sum:number){
-        this.sumInput.value=sum.toString();
+    showStats(sum:number, avg:number, min:number,max:number){
+        this.dataSumInput.value=sum.toString();
+        this.dataAvgInput.value=avg.toString();
+        this.dataMinInput.value=min.toString();
+        this.dataMaxInput.value=max.toString();
     }
-*/
+
+    watchInputValues(){
+        const number = +this.numberOfInputs.value;
+        this.numberOfInputs.addEventListener('input',()=>this.createInput());
+
+        if(this.inputsContainer.hasChildNodes()){
+
+            for(let i=0;i<number;i++){
+            this.dataArray[i]?.addEventListener('input',()=>this.computeData());
+            }
+        }
+    }
 
 
 }
