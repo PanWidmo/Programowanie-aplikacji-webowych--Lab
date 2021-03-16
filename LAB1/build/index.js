@@ -1,14 +1,15 @@
 var StatsApp = /** @class */ (function () {
     function StatsApp() {
+        this.dataArray = [];
         this.startApp();
     }
     StatsApp.prototype.startApp = function () {
         var _this = this;
-        //this.getInputs();
         //this.watchInputValues();
         this.numberOfInputs = document.querySelector("#numberOfInputs");
         this.button = document.getElementById("button");
         this.button.addEventListener("click", function () { return _this.createInput(); });
+        this.getInputs();
     };
     StatsApp.prototype.createInput = function () {
         var _a, _b, _c;
@@ -35,6 +36,20 @@ var StatsApp = /** @class */ (function () {
             this.inputsContainer.appendChild(brake);
         }
         this.startApp();
+    };
+    StatsApp.prototype.getInputs = function () {
+        this.inputsContainer = document.getElementById("inputsContainer");
+        if (this.inputsContainer.hasChildNodes()) {
+            var number = +this.numberOfInputs.value;
+            for (var i = 0; i < number; i++) {
+                var data = ".data" + (i + 1);
+                this.dataArray.push(document.querySelector(data));
+            }
+        }
+        this.dataSumInput = document.querySelector('#sumInput');
+        this.dataAvgInput = document.querySelector('#avgInput');
+        this.dataMinInput = document.querySelector('#minInput');
+        this.dataMaxInput = document.querySelector('#maxInput');
     };
     return StatsApp;
 }());
