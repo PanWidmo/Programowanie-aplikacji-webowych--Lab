@@ -1,6 +1,8 @@
 class StatsApp{
 
     numberOfInputs:HTMLInputElement;
+    inputsContainer: HTMLElement;
+    button: HTMLElement;
 
     data1Input:HTMLInputElement;
     sumInput:HTMLInputElement;
@@ -12,36 +14,42 @@ class StatsApp{
     startApp(){
         //this.getInputs();
         //this.watchInputValues();
-        this.createInput();
+        this.numberOfInputs = document.querySelector("#numberOfInputs");
+        this.button = document.getElementById("button");
+        this.button.addEventListener("click", () => this.createInput());
     }
 
-    createInput(){
+    createInput() {
+        this.inputsContainer = document.getElementById("inputsContainer");
+        const number = +this.numberOfInputs.value;
 
-        this.numberOfInputs=document.querySelector('#numberOfInputs');
-        const number=+this.numberOfInputs.value;
+        while(this.inputsContainer?.hasChildNodes()){
+                  this.inputsContainer?.removeChild(this.inputsContainer?.lastChild);
+              }
 
-        const inputsContainer=document.getElementById("#inputsContainer");
+        for (let i = 0; i < number; i++) {
+            const newInputLabel = document.createElement("label");
+            newInputLabel.innerHTML = "Value: ";
+            newInputLabel.setAttribute("class", "data" + (i + 1));
+            this.inputsContainer.appendChild(newInputLabel);
 
-        for(let i=0;i<number;i++){
-            const newInput = document.createElement('input');
-            newInput.setAttribute("type","text");
-            newInput.setAttribute("class","data"+(i+1));
-            inputsContainer.appendChild(newInput);
+            const newInput = document.createElement("input");
+             newInput.setAttribute("type", "text");
+            newInput.setAttribute("class", "data" + (i + 1));
+            this.inputsContainer.appendChild(newInput);
 
-            const newInputLabel=document.createElement('label');
-            newInputLabel.innerHTML="Value: ";
-            newInputLabel.setAttribute("class","data"+(i+1));
-            inputsContainer.appendChild(newInputLabel);
+            const removeInputButton = document.createElement("button");
+            removeInputButton.textContent = "Remove";
+            removeInputButton.className = "data" + (i + 1);
+            this.inputsContainer.appendChild(removeInputButton);
 
-            const removeInputButton=document.createElement('button');
-            removeInputButton.innerHTML="Remove";
-            removeInputButton.setAttribute("class","data"+(i+1));
-            inputsContainer.appendChild(removeInputButton);
+            const brake = document.createElement("br");
+            brake.className = "data" + (i + 1);
+            this.inputsContainer.appendChild(brake);
 
         }
-
-
-    }
+        this.startApp();
+      }
 
     /*getInputs(){
         this.data1Input=document.querySelector('#data1');

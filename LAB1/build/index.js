@@ -3,28 +3,38 @@ var StatsApp = /** @class */ (function () {
         this.startApp();
     }
     StatsApp.prototype.startApp = function () {
+        var _this = this;
         //this.getInputs();
         //this.watchInputValues();
-        this.createInput();
+        this.numberOfInputs = document.querySelector("#numberOfInputs");
+        this.button = document.getElementById("button");
+        this.button.addEventListener("click", function () { return _this.createInput(); });
     };
     StatsApp.prototype.createInput = function () {
-        this.numberOfInputs = document.querySelector('#numberOfInputs');
+        var _a, _b, _c;
+        this.inputsContainer = document.getElementById("inputsContainer");
         var number = +this.numberOfInputs.value;
-        var inputsContainer = document.getElementById("#inputsContainer");
+        while ((_a = this.inputsContainer) === null || _a === void 0 ? void 0 : _a.hasChildNodes()) {
+            (_b = this.inputsContainer) === null || _b === void 0 ? void 0 : _b.removeChild((_c = this.inputsContainer) === null || _c === void 0 ? void 0 : _c.lastChild);
+        }
         for (var i = 0; i < number; i++) {
-            var newInput = document.createElement('input');
-            newInput.setAttribute("type", "text");
-            newInput.setAttribute("class", "data" + (i + 1));
-            inputsContainer.appendChild(newInput);
-            var newInputLabel = document.createElement('label');
+            var newInputLabel = document.createElement("label");
             newInputLabel.innerHTML = "Value: ";
             newInputLabel.setAttribute("class", "data" + (i + 1));
-            inputsContainer.appendChild(newInputLabel);
-            var removeInputButton = document.createElement('button');
-            removeInputButton.innerHTML = "Remove";
-            removeInputButton.setAttribute("class", "data" + (i + 1));
-            inputsContainer.appendChild(removeInputButton);
+            this.inputsContainer.appendChild(newInputLabel);
+            var newInput = document.createElement("input");
+            newInput.setAttribute("type", "text");
+            newInput.setAttribute("class", "data" + (i + 1));
+            this.inputsContainer.appendChild(newInput);
+            var removeInputButton = document.createElement("button");
+            removeInputButton.textContent = "Remove";
+            removeInputButton.className = "data" + (i + 1);
+            this.inputsContainer.appendChild(removeInputButton);
+            var brake = document.createElement("br");
+            brake.className = "data" + (i + 1);
+            this.inputsContainer.appendChild(brake);
         }
+        this.startApp();
     };
     return StatsApp;
 }());
