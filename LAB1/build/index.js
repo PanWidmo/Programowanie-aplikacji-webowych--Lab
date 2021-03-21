@@ -30,7 +30,12 @@ var StatsApp = /** @class */ (function () {
             removeInputButton.textContent = "Remove";
             removeInputButton.className = "data" + (i + 1);
             this_1.inputsContainer.appendChild(removeInputButton);
-            removeInputButton.addEventListener('click', function () { return _this.removeInput(i + 1); });
+            removeInputButton.addEventListener('click', function () {
+                var d = document.querySelector('.data' + (i + 1));
+                d.remove();
+                _this.dataArray.splice(i, 1);
+                _this.computeData();
+            });
             var brake = document.createElement("br");
             brake.className = "data" + (i + 1);
             this_1.inputsContainer.appendChild(brake);
@@ -40,14 +45,6 @@ var StatsApp = /** @class */ (function () {
             _loop_1(i);
         }
         this.startApp();
-    };
-    StatsApp.prototype.removeInput = function (n) {
-        for (var i = 0; i < 4; i++) {
-            var d = document.querySelector('.data' + n);
-            d.remove();
-        }
-        this.dataArray.splice(n - 1, 1);
-        this.dataArray.splice(n, 1);
     };
     StatsApp.prototype.getInputs = function () {
         this.inputsContainer = document.getElementById("inputsContainer");
@@ -86,7 +83,10 @@ var StatsApp = /** @class */ (function () {
         var _this = this;
         var _a;
         var number = +this.numberOfInputs.value;
+        //dodaje inputy po zmianie inputfi
         this.numberOfInputs.addEventListener('input', function () { return _this.createInput(); });
+        //this.numberOfInputs.addEventListener('click',()=> this.removeInput);
+        //odswieza dane po zmianie w inpucie
         if (this.inputsContainer.hasChildNodes()) {
             for (var i = 0; i < number; i++) {
                 (_a = this.dataArray[i]) === null || _a === void 0 ? void 0 : _a.addEventListener('input', function () { return _this.computeData(); });

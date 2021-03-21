@@ -42,7 +42,14 @@ class StatsApp{
             removeInputButton.textContent = "Remove";
             removeInputButton.className = "data" + (i + 1);
             this.inputsContainer.appendChild(removeInputButton);
-            removeInputButton.addEventListener('click', ()=> this.removeInput(i+1));
+            removeInputButton.addEventListener('click', ()=> {
+
+                    const d=document.querySelector('.data'+(i+1));
+                    d.remove();
+
+                    this.dataArray.splice(i,1);
+                    this.computeData();
+            });
 
             const brake = document.createElement("br");
             brake.className = "data" + (i + 1);
@@ -51,14 +58,6 @@ class StatsApp{
         }
         this.startApp();
       }
-
-    removeInput(n:number){
-       for(let i=0;i<4;i++){
-       const d=document.querySelector('.data'+n);
-       d.remove();
-       }
-       this.dataArray.splice(n-1,1);
-    }
 
     getInputs(){
         this.inputsContainer = document.getElementById("inputsContainer");
@@ -106,13 +105,18 @@ class StatsApp{
 
     watchInputValues(){
         const number = +this.numberOfInputs.value;
-        this.numberOfInputs.addEventListener('input',()=>this.createInput());
 
+        //dodaje inputy po zmianie inputfi
+        this.numberOfInputs.addEventListener('input',()=>this.createInput());
+        //this.numberOfInputs.addEventListener('click',()=> this.removeInput);
+
+        //odswieza dane po zmianie w inpucie
         if(this.inputsContainer.hasChildNodes()){
 
             for(let i=0;i<number;i++){
             this.dataArray[i]?.addEventListener('input',()=>this.computeData());
             }
+
         }
     }
 
