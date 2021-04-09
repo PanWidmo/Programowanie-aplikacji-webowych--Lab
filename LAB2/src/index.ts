@@ -1,4 +1,8 @@
 const channel1:any[]=[];
+const channel2:any[]=[];
+const channel3:any[]=[];
+const channel4:any[]=[];
+
 const sound1:HTMLAudioElement = document.querySelector('[data-sound="boom"]');
 const sound2:HTMLAudioElement = document.querySelector('[data-sound="clap"]');
 const sound3:HTMLAudioElement = document.querySelector('[data-sound="hithat"]');
@@ -8,6 +12,7 @@ const sound6:HTMLAudioElement = document.querySelector('[data-sound="ride"]');
 const sound7:HTMLAudioElement = document.querySelector('[data-sound="snare"]');
 const sound8:HTMLAudioElement = document.querySelector('[data-sound="tink"]');
 const sound9:HTMLAudioElement = document.querySelector('[data-sound="tom"]');
+
 const sound1Btn:HTMLButtonElement = document.querySelector('#soundBtn1');
 const sound2Btn:HTMLButtonElement = document.querySelector('#soundBtn2');
 const sound3Btn:HTMLButtonElement = document.querySelector('#soundBtn3');
@@ -18,11 +23,23 @@ const sound7Btn:HTMLButtonElement = document.querySelector('#soundBtn7');
 const sound8Btn:HTMLButtonElement = document.querySelector('#soundBtn8');
 const sound9Btn:HTMLButtonElement = document.querySelector('#soundBtn9');
 
-const playChanel1Btn:HTMLButtonElement = document.querySelector('#playChannel1');
+const startChannel1Btn:HTMLButtonElement = document.querySelector('#startChannel1');
+const startChannel2Btn:HTMLButtonElement = document.querySelector('#startChannel2');
+const startChannel3Btn:HTMLButtonElement = document.querySelector('#startChannel3')
+const startChannel4Btn:HTMLButtonElement = document.querySelector('#startChannel4');
+
+const stopChannel1Btn:HTMLButtonElement = document.querySelector('#stopChannel1');
+const stopChannel2Btn:HTMLButtonElement = document.querySelector('#stopChannel2');
+const stopChannel3Btn:HTMLButtonElement = document.querySelector('#stopChannel3');
+const stopChannel4Btn:HTMLButtonElement = document.querySelector('#stopChannel4');
+
+const playChannel1Btn:HTMLButtonElement = document.querySelector('#playChannel1');
+const playChannel2Btn:HTMLButtonElement = document.querySelector('#playChannel2');
+const playChannel3Btn:HTMLButtonElement = document.querySelector('#playChannel3');
+const playChannel4Btn:HTMLButtonElement = document.querySelector('#playChannel4');
 
 document.body.addEventListener('keypress',onKeyDown);
-playChanel1Btn.addEventListener('click',onPlayChanel1);
-
+playChannel1Btn.addEventListener('click',onPlayChanel1);
 
 //dodac walidacje dla capslocka (alert, ze jest wlaczony i poprosic o wylaczenie?)
 
@@ -99,4 +116,8 @@ function playChannel1():void {
         setTimeout(() => playSound(sound.key), timeout);
         playSound(sound.key);
     });
+}
+
+function opacityChange(){
+    document.getElementById('.opacity').style.opacity='1';
 }

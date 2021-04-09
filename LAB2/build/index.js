@@ -1,4 +1,7 @@
 var channel1 = [];
+var channel2 = [];
+var channel3 = [];
+var channel4 = [];
 var sound1 = document.querySelector('[data-sound="boom"]');
 var sound2 = document.querySelector('[data-sound="clap"]');
 var sound3 = document.querySelector('[data-sound="hithat"]');
@@ -17,9 +20,17 @@ var sound6Btn = document.querySelector('#soundBtn6');
 var sound7Btn = document.querySelector('#soundBtn7');
 var sound8Btn = document.querySelector('#soundBtn8');
 var sound9Btn = document.querySelector('#soundBtn9');
-var playChanel1Btn = document.querySelector('#playChannel1');
+var startChannel1Btn = document.querySelector('#startChannel1');
+var startChannel2Btn = document.querySelector('#startChannel2');
+var startChannel3Btn = document.querySelector('#startChannel3');
+var startChannel4Btn = document.querySelector('#startChannel4');
+var stopChannel1Btn = document.querySelector('#stopChannel1');
+var stopChannel2Btn = document.querySelector('#stopChannel2');
+var stopChannel3Btn = document.querySelector('#stopChannel3');
+var stopChannel4Btn = document.querySelector('#stopChannel4');
+var playChannel1Btn = document.querySelector('#playChannel1');
 document.body.addEventListener('keypress', onKeyDown);
-playChanel1Btn.addEventListener('click', onPlayChanel1);
+playChannel1Btn.addEventListener('click', onPlayChanel1);
 //dodac walidacje dla capslocka (alert, ze jest wlaczony i poprosic o wylaczenie?)
 function onKeyDown(ev) {
     //console.log(ev);
@@ -87,4 +98,7 @@ function playChannel1() {
         setTimeout(function () { return playSound(sound.key); }, timeout);
         playSound(sound.key);
     });
+}
+function opacityChange() {
+    document.getElementById('.opacity').style.opacity = '1';
 }
