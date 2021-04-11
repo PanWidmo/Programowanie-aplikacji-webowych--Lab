@@ -34,7 +34,13 @@ body{
 }
 
 .playing{
-    transform: scale(3);
+    transform: scale(1.2);
+    opacity: 100%;
+}
+
+.stopPlaying{
+    transform: scale(1);
+    opacity: 20%;
 }
 
 .controlBtn{
