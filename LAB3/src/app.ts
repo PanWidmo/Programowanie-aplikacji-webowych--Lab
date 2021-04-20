@@ -10,6 +10,7 @@ export class App {
         cityInput.addEventListener('click', (ev:Event) => this.getCityName())
     }
 
+
     //info z api dot CityName
     getCityName(){
         const cityInput = <HTMLInputElement>document.getElementById('cityName');
