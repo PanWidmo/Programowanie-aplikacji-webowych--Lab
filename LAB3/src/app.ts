@@ -10,12 +10,20 @@ export class App {
         cityInput.addEventListener('click', (ev:Event) => this.getCityName())
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 12d13f29920f13ee534b574d0b5b29cf545c75ed
     //info z api dot CityName
     getCityName(){
         const cityInput = <HTMLInputElement>document.getElementById('cityName');
         const city = cityInput.value;
         console.log(city);
+<<<<<<< HEAD
         // wpisanie parametru do innej funkcji
+=======
+        //tu wpisanie parametru do innej funkcji
+>>>>>>> 12d13f29920f13ee534b574d0b5b29cf545c75ed
         this.getCityInfo(city);
     }
 
