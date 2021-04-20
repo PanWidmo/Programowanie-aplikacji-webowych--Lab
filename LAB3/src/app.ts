@@ -1,9 +1,9 @@
 export class App {
-    opwApiKey = 'd4f238eb17f043fca2a79be91d062376';
+    opwApiKey = '50d53005c0fd5f556bb4ef15224c4209';
     constructor() {
-        this.onClickButton();
-        // this.getCityInfo('zakopane');
+        this.getCityInfo('zakopane')
     }
+<<<<<<< HEAD
 
     onClickButton(){
         const cityInput = <HTMLInputElement>document.getElementById('cityButton');
@@ -28,13 +28,12 @@ export class App {
     }
 
     //info z api dot weather
+=======
+>>>>>>> parent of 7791e3b... Test03
     async getCityInfo(city: string) {
-        const weather = await this.getWeather(city);
+        const weather = await this.getWeather('zakopane');
         this.saveData(weather);
-        const a= weather.wind.speed;
-        console.log(a);
     }
-
     async getWeather(city: string): Promise<any> {
         const openWeatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${this.opwApiKey}`;
         const weatherResponse = await fetch(openWeatherUrl);
@@ -42,12 +41,9 @@ export class App {
         console.log(weatherData);
         return weatherData;
     }
-
     saveData(data: any) {
-        //jakas petla do weatherData/ zmienna globalna do ilosci uzyc
         localStorage.setItem('weatherData', JSON.stringify(data));
     }
-
     getData() {
         const data = localStorage.getItem('weatherData');
         if (data) {
