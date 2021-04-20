@@ -20,7 +20,7 @@ export class App {
         this.getCityInfo(city);
     }
 
-    //info z api dot weather
+    //tu info z api dot weather
     async getCityInfo(city: string) {
         const weather = await this.getWeather(city);
         this.saveData(weather);
