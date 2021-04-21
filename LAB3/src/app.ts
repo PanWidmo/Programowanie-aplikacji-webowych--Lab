@@ -1,6 +1,7 @@
 export class App {
     opwApiKey = 'd4f238eb17f043fca2a79be91d062376';
     boxNumber: number = 0;
+
     constructor() {
         this.onClickButton();
         // this.getCityInfo('zakopane');
@@ -15,7 +16,7 @@ export class App {
     getCityName(){
         const cityInput = <HTMLInputElement>document.getElementById('cityName');
         const city = cityInput.value;
-        console.log(city);
+        //console.log(city);
         //wpisanie parametru do innej funkcji
         this.getCityWeather(city);
     }
@@ -26,6 +27,7 @@ export class App {
 
         //pobieranie danych z jsona
         const name = weather.name;
+        const img =  `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`;
         const temp = Math.round(weather.main.temp - 273.15).toString();
         const sky = weather.weather[0].main;
         const pressure = weather.main.pressure;
@@ -36,6 +38,7 @@ export class App {
         weatherBox.className = 'weatherBoxClass'
         weatherBox.setAttribute("id","weatherBoxId");
         const weatherCityName = document.createElement('h1');
+        const weatherCityImg = document.createElement('img');
         const weatherCityTemp = document.createElement('p');
         const weatherCitySky = document.createElement('p');
         const weatherCityPressure = document.createElement('p');
@@ -46,8 +49,9 @@ export class App {
 
         //uzupelnienie szkieletu danymi
         weatherCityName.innerHTML = name;
+        weatherCityImg.src = img;
         weatherCityTemp.innerHTML = "Temp: " + temp +"&deg;C";
-        weatherCitySky.innerHTML = sky;
+        weatherCitySky.innerHTML = "Sky: " + sky;
         weatherCityPressure.innerHTML = "Pressure: " + pressure + " hPA";
         weatherCityHumidity.innerHTML = "Humidity: " + humidity + "%";
 
@@ -55,12 +59,15 @@ export class App {
         const space = document.getElementById('weathers');
         space.appendChild(weatherBox);
         weatherBox.appendChild(weatherCityName);
+        weatherBox.appendChild(weatherCityImg);
         weatherBox.appendChild(weatherCityTemp);
         weatherBox.appendChild(weatherCitySky);
         weatherBox.appendChild(weatherCityPressure);
         weatherBox.appendChild(weatherCityHumidity);
 
-        //zapisanie do pamieci
+        //czyszczenie inputa i zapisanie do pamieci
+        const cityInput = <HTMLInputElement>document.getElementById("cityName");
+        cityInput.value = "";
         this.saveData(weather);
 
     }
@@ -75,8 +82,8 @@ export class App {
 
     //zapis do pamieci
     saveData(data: any) {
-        //jakas petla do weatherData/ zmienna globalna do ilosci uzyc
-        localStorage.setItem('weatherData', JSON.stringify(data));
+        this.boxNumber++;
+        localStorage.setItem('weatherData' + this.boxNumber, JSON.stringify(data));
     }
 
     //wyciaganie z pamieci
