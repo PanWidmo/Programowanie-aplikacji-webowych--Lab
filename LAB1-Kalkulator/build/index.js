@@ -74,7 +74,7 @@ var StatsApp = /** @class */ (function () {
                     dataArray2[i] = +this.dataArray[i].value;
                 }
                 else {
-                    alert("Type correct data");
+                    alert("Wrong data format!");
                     var tmp = "";
                     var a = this.dataArray[i];
                     a.value = tmp;
@@ -95,7 +95,7 @@ var StatsApp = /** @class */ (function () {
             this.dataMaxInput.value = tmp;
             this.dataMinInput.value = tmp;
             this.numberOfInputs.value = tmp;
-            alert("All data removed");
+            alert("All data removed!");
         }
     };
     StatsApp.prototype.showStats = function (sum, avg, min, max) {

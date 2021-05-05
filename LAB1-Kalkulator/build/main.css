@@ -1,0 +1,80 @@
+body{
+    background-color: lightgray;
+    text-align: center;
+    font-size: 17px;
+    width:1200px;
+    margin:0 auto;
+
+}
+
+.inputData{
+    width:400px;
+    display:grid;
+    grid-template-columns: 30% 50% 20%;
+    width:400px;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #000;
+}
+
+.inputData label{
+    text-align: left;
+    grid-column: 1;
+}
+
+.inputData input{
+    grid-column: 2;
+    width:140px;
+}
+
+#inputsContainer{
+    display: grid;
+    grid-template-columns: 30% 50% 20%;
+    margin:0 auto;
+    width:400px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #000;
+}
+
+#inputsContainer label{
+    grid-column: 1;
+    text-align: left;
+    margin-top:10px;
+
+}
+
+#inputsContainer input{
+    grid-column: 2;
+    width:140px;
+    margin-top:10px;
+}
+
+#inputsContainer button{
+    grid-column: 3;
+    margin-top:10px;
+    width:80px;
+}
+
+.statsData{
+    display:grid;
+    grid-template-columns: 30% 50% 20%;
+    width:400px;
+    align-items: center;
+    margin: 0 auto;
+    margin-top:30px;
+}
+
+.descLabel{
+    grid-column: 1;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.calcOutput{
+    grid-column: 2;
+    margin-bottom: 20px;
+    width:140px;
+}

@@ -49,8 +49,10 @@ class StatsApp{
             removeInputButton.addEventListener('click', (ev:Event)=> {
 
                     this.number= this.number-1;
+
                     const tmp = (ev.target as Element).className;
                     const x = this.dataArray.findIndex(x => x.className === tmp);
+
                     this.dataArray.splice(x,1);
                     document.querySelectorAll('.data'+(i+1)).forEach(e=>e.remove());
 
@@ -94,23 +96,23 @@ class StatsApp{
                 }
 
                 else {
-                    alert("Type correct data");
+                    alert("Wrong data format!");
                     const tmp:string = "";
                     const a = this.dataArray[i];
                     a.value=tmp;
                     }
                 }
 
-        for(let i=0;i<dataArray2.length;i++){
-            sum+=dataArray2[i];
+            for(let i=0;i<dataArray2.length;i++){
+                sum+=dataArray2[i];
+            }
+
+            const avg = sum/this.number;
+            const max = Math.max.apply(Math, dataArray2);
+            const min = Math.min.apply(Math, dataArray2);
+
+            this.showStats(sum, avg, min, max);
         }
-
-        const avg = sum/this.number;
-        const max = Math.max.apply(Math, dataArray2);
-        const min = Math.min.apply(Math, dataArray2);
-
-        this.showStats(sum, avg, min, max);
-    }
 
     else {
         const tmp:string = "";
@@ -120,7 +122,7 @@ class StatsApp{
         this.dataMinInput.value=tmp;
         this.numberOfInputs.value=tmp;
 
-        alert("All data removed");
+        alert("All data removed!");
         }
     }
 
@@ -142,8 +144,6 @@ class StatsApp{
 
         }
     }
-
-
 }
 
 const statsApp= new StatsApp();
