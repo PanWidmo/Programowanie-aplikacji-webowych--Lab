@@ -27,38 +27,32 @@ class StatsApp{
         while(this.inputsContainer?.hasChildNodes()){
                 this.inputsContainer?.removeChild(this.inputsContainer?.lastChild);
                 this.dataArray=[];
-                const tmp:string = "0";
-                this.dataSumInput.value=tmp;
-                this.dataAvgInput.value=tmp;
-                this.dataMaxInput.value=tmp;
-                this.dataMinInput.value=tmp;
               }
 
         for (let i = 0; i < number; i++) {
             const newInputLabel = document.createElement("label");
             newInputLabel.innerHTML = "Value: ";
             newInputLabel.setAttribute("class", "data" + (i + 1));
-            this.inputsContainer.appendChild(newInputLabel);
+            this.inputsContainer?.appendChild(newInputLabel);
 
             const newInput = document.createElement("input");
              newInput.setAttribute("type", "text");
             newInput.setAttribute("class", "data" + (i + 1));
             newInput.setAttribute("id","input"+(i+1));
-            this.inputsContainer.appendChild(newInput);
+            this.inputsContainer?.appendChild(newInput);
 
             const removeInputButton = document.createElement("button");
             removeInputButton.textContent = "Remove";
             removeInputButton.className = "data" + (i + 1);
-            this.inputsContainer.appendChild(removeInputButton);
-            
-            removeInputButton.addEventListener('click', ()=> {
+            this.inputsContainer?.appendChild(removeInputButton);
 
-                    document.querySelectorAll('.data'+(i+1)).forEach(e=>e.remove());
+            removeInputButton.addEventListener('click', (ev:Event)=> {
 
                     this.number= this.number-1;
-                    console.log(this.dataArray.splice(i,1));
-                    this.dataArray.splice(i,1);
-                    console.log(this.dataArray.splice(i,1));
+                    const tmp = (ev.target as Element).className;
+                    const x = this.dataArray.findIndex(x => x.className === tmp);
+                    this.dataArray.splice(x,1);
+                    document.querySelectorAll('.data'+(i+1)).forEach(e=>e.remove());
 
                     this.computeData();
             });
@@ -92,17 +86,23 @@ class StatsApp{
     computeData(){
         const dataArray2:number[]=[];
         let sum:number=0;
-        //const number = +this.numberOfInputs.value;
 
-        for(let i=0;i<this.number;i++){
-            dataArray2[i]=+this.dataArray[i].value;
-            // sum+=dataArray2[i];
-            // console.log(sum);
-        }
+        if(this.dataArray.length>0){
+            for(let i=0;i<this.number;i++){
+                if(!(isNaN(+this.dataArray[i].value))){
+                dataArray2[i]=+this.dataArray[i].value;
+                }
+
+                else {
+                    alert("Type correct data");
+                    const tmp:string = "";
+                    const a = this.dataArray[i];
+                    a.value=tmp;
+                    }
+                }
 
         for(let i=0;i<dataArray2.length;i++){
             sum+=dataArray2[i];
-            //console.log(sum);
         }
 
         const avg = sum/this.number;
@@ -110,6 +110,18 @@ class StatsApp{
         const min = Math.min.apply(Math, dataArray2);
 
         this.showStats(sum, avg, min, max);
+    }
+
+    else {
+        const tmp:string = "";
+        this.dataSumInput.value=tmp;
+        this.dataAvgInput.value=tmp;
+        this.dataMaxInput.value=tmp;
+        this.dataMinInput.value=tmp;
+        this.numberOfInputs.value=tmp;
+
+        alert("All data removed");
+        }
     }
 
     showStats(sum:number, avg:number, min:number,max:number){
@@ -120,12 +132,9 @@ class StatsApp{
     }
 
     watchInputValues(){
-        //const number = +this.numberOfInputs.value;
 
-        //dodaje inputy po zmianie inputBoxa z iloscia
         this.numberOfInputs.addEventListener('input',()=>this.createInput());
 
-        //odswieza dane po zmianie w inpucie
         if(this.inputsContainer.hasChildNodes()){
             for(let i=0;i<this.number;i++){
             this.dataArray[i]?.addEventListener('input',()=>this.computeData());
