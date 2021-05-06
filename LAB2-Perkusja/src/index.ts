@@ -39,8 +39,23 @@ const playChannel3Btn:HTMLButtonElement = document.querySelector('#playChannel3'
 const playChannel4Btn:HTMLButtonElement = document.querySelector('#playChannel4');
 
 document.body.addEventListener('keypress',onKeyDown);
-playChannel1Btn.addEventListener('click',onPlayChanel1);
 document.body.addEventListener('transitionend', removeTransition);
+
+startChannel1Btn.addEventListener('click', startRecording);
+startChannel2Btn.addEventListener('click', startRecording);
+startChannel3Btn.addEventListener('click', startRecording);
+startChannel4Btn.addEventListener('click', startRecording);
+
+stopChannel1Btn.addEventListener('click', stopRecording);
+stopChannel2Btn.addEventListener('click', stopRecording);
+stopChannel2Btn.addEventListener('click', stopRecording);
+stopChannel4Btn.addEventListener('click', stopRecording);
+
+playChannel1Btn.addEventListener('click', onPlayChanel);
+playChannel2Btn.addEventListener('click', onPlayChanel);
+playChannel3Btn.addEventListener('click', onPlayChanel);
+playChannel4Btn.addEventListener('click', onPlayChanel);
+
 
 //dodac walidacje dla capslocka (alert, ze jest wlaczony i poprosic o wylaczenie?)
 
@@ -119,11 +134,20 @@ function playSound(key:string) {
     }
 }
 
-function onPlayChanel1():void{
-    playChannel1();
+function startRecording(event){
+
 }
 
-function playChannel1():void {
+function stopRecording(event){
+
+}
+
+
+function onPlayChanel():void{
+    playChannel();
+}
+
+function playChannel():void {
     let prevTime = 0;
     channel1.forEach(sound => {
         const timeout = sound.time - prevTime;
