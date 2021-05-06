@@ -33,8 +33,19 @@ var playChannel2Btn = document.querySelector('#playChannel2');
 var playChannel3Btn = document.querySelector('#playChannel3');
 var playChannel4Btn = document.querySelector('#playChannel4');
 document.body.addEventListener('keypress', onKeyDown);
-playChannel1Btn.addEventListener('click', onPlayChanel1);
 document.body.addEventListener('transitionend', removeTransition);
+startChannel1Btn.addEventListener('click', startRecording);
+startChannel2Btn.addEventListener('click', startRecording);
+startChannel3Btn.addEventListener('click', startRecording);
+startChannel4Btn.addEventListener('click', startRecording);
+stopChannel1Btn.addEventListener('click', stopRecording);
+stopChannel2Btn.addEventListener('click', stopRecording);
+stopChannel2Btn.addEventListener('click', stopRecording);
+stopChannel4Btn.addEventListener('click', stopRecording);
+playChannel1Btn.addEventListener('click', onPlayChanel);
+playChannel2Btn.addEventListener('click', onPlayChanel);
+playChannel3Btn.addEventListener('click', onPlayChanel);
+playChannel4Btn.addEventListener('click', onPlayChanel);
 //dodac walidacje dla capslocka (alert, ze jest wlaczony i poprosic o wylaczenie?)
 function onKeyDown(ev) {
     var key = ev.key;
@@ -46,14 +57,14 @@ function onKeyDown(ev) {
             time: time
         });
         playSound(key);
-        console.log(channel1);
     }
     else
         window.alert("Wrong key!");
 }
 function removeTransition(e) {
-    if (e.propertyName !== 'transform')
+    if (e.propertyName !== 'transform') {
         return;
+    }
     e.target.classList.remove('playing');
 }
 function playSound(key) {
@@ -62,6 +73,7 @@ function playSound(key) {
             sound1.currentTime = 0;
             sound1Btn.classList.add('playing');
             sound1.play();
+            removeTransition(sound1Btn);
             break;
         case "w":
             sound2.currentTime = 0;
@@ -105,10 +117,14 @@ function playSound(key) {
             break;
     }
 }
-function onPlayChanel1() {
-    playChannel1();
+function startRecording(event) {
 }
-function playChannel1() {
+function stopRecording(event) {
+}
+function onPlayChanel() {
+    playChannel();
+}
+function playChannel() {
     var prevTime = 0;
     channel1.forEach(function (sound) {
         var timeout = sound.time - prevTime;

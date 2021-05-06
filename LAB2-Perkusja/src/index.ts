@@ -67,20 +67,22 @@ function onKeyDown(ev:KeyboardEvent): void {
     if(key=="q" || key=="w" || key=="e" || key=="a" || key=="s" || key=="d"
     || key=="z" || key=="x" || key=="c"){
 
-    channel1.push({
-        key,
-        time
-    });
+        channel1.push({
+            key,
+            time
+        });
 
-    playSound(key);
-    console.log(channel1);
+        playSound(key);
     }
 
     else window.alert("Wrong key!");
 }
 
-function removeTransition(e:any) {
-    if (e.propertyName !== 'transform') return;
+function removeTransition(e) {
+    if (e.propertyName !== 'transform') {
+        return;
+    }
+
     e.target.classList.remove('playing');
 }
 
@@ -90,6 +92,7 @@ function playSound(key:string) {
             sound1.currentTime = 0;
             sound1Btn.classList.add('playing');
             sound1.play();
+            removeTransition(sound1Btn);
             break;
         case "w":
             sound2.currentTime = 0;
