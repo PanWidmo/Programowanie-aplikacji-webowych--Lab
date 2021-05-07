@@ -48,14 +48,13 @@ startChannel4Btn.addEventListener('click', startRecording);
 
 stopChannel1Btn.addEventListener('click', stopRecording);
 stopChannel2Btn.addEventListener('click', stopRecording);
-stopChannel2Btn.addEventListener('click', stopRecording);
+stopChannel3Btn.addEventListener('click', stopRecording);
 stopChannel4Btn.addEventListener('click', stopRecording);
 
 playChannel1Btn.addEventListener('click', onPlayChanel);
 playChannel2Btn.addEventListener('click', onPlayChanel);
 playChannel3Btn.addEventListener('click', onPlayChanel);
 playChannel4Btn.addEventListener('click', onPlayChanel);
-
 
 //dodac walidacje dla capslocka (alert, ze jest wlaczony i poprosic o wylaczenie?)
 
@@ -66,6 +65,8 @@ function onKeyDown(ev:KeyboardEvent): void {
 
     if(key=="q" || key=="w" || key=="e" || key=="a" || key=="s" || key=="d"
     || key=="z" || key=="x" || key=="c"){
+
+        //wsadzic switcha w zaleznosci od kanalu
 
         channel1.push({
             key,
@@ -92,7 +93,6 @@ function playSound(key:string) {
             sound1.currentTime = 0;
             sound1Btn.classList.add('playing');
             sound1.play();
-            removeTransition(sound1Btn);
             break;
         case "w":
             sound2.currentTime = 0;
@@ -139,10 +139,71 @@ function playSound(key:string) {
 
 function startRecording(event){
 
+    switch(event.target.id){
+        case "startChannel1":
+            startChannel1Btn.disabled = true;
+            stopChannel1Btn.disabled = false;
+            playChannel1Btn.disabled = true;
+
+            while(channel1.length>0){
+                channel1.pop();
+            }
+        break;
+        case "startChannel2":
+            startChannel2Btn.disabled = true;
+            stopChannel2Btn.disabled = false;
+            playChannel2Btn.disabled = true;
+
+            while(channel2.length>0){
+                channel2.pop();
+            }
+        break;
+        case "startChannel3":
+            startChannel3Btn.disabled = true;
+            stopChannel3Btn.disabled = false;
+            playChannel3Btn.disabled = true;
+
+            while(channel3.length>0){
+                channel3.pop();
+            }
+        break;
+        case "startChannel4":
+            startChannel4Btn.disabled = true;
+            stopChannel4Btn.disabled = false;
+            playChannel4Btn.disabled = true;
+
+            while(channel4.length>0){
+                channel4.pop();
+            }
+        break;
+
+    }
 }
 
 function stopRecording(event){
 
+    switch(event.target.id){
+        case "stopChannel1":
+            startChannel1Btn.disabled = false;
+            stopChannel1Btn.disabled = true;
+            playChannel1Btn.disabled = false;
+        break;
+        case "stopChannel2":
+            startChannel2Btn.disabled = false;
+            stopChannel2Btn.disabled = true;
+            playChannel2Btn.disabled = false;
+        break;
+        case "stopChannel3":
+            startChannel3Btn.disabled = false;
+            stopChannel3Btn.disabled = true;
+            playChannel3Btn.disabled = false;
+        break;
+        case "stopChannel4":
+            startChannel4Btn.disabled = false;
+            stopChannel4Btn.disabled = true;
+            playChannel4Btn.disabled = false;
+        break;
+    }
 }
 
 
@@ -150,11 +211,12 @@ function onPlayChanel():void{
     playChannel();
 }
 
+// jak jest play to reszta buttonow disabled
 function playChannel():void {
     let prevTime = 0;
+
     channel1.forEach(sound => {
         const timeout = sound.time - prevTime;
         setTimeout(() => playSound(sound.key), timeout);
-        playSound(sound.key);
     });
 }
