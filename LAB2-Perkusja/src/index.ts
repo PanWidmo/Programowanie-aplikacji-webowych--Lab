@@ -3,6 +3,13 @@ const channel2:any[]=[];
 const channel3:any[]=[];
 const channel4:any[]=[];
 
+let timeChannel1:number;
+let timeChannel2:number;
+let timeChannel3:number;
+let timeChannel4:number;
+
+let currChanell:string;
+
 const sound1:HTMLAudioElement = document.querySelector('[data-sound="boom"]');
 const sound2:HTMLAudioElement = document.querySelector('[data-sound="clap"]');
 const sound3:HTMLAudioElement = document.querySelector('[data-sound="hithat"]');
@@ -59,24 +66,53 @@ playChannel4Btn.addEventListener('click', onPlayChanel);
 //dodac walidacje dla capslocka (alert, ze jest wlaczony i poprosic o wylaczenie?)
 
 function onKeyDown(ev:KeyboardEvent): void {
-
     const key=ev.key;
     const time=ev.timeStamp;
 
-    if(key=="q" || key=="w" || key=="e" || key=="a" || key=="s" || key=="d"
-    || key=="z" || key=="x" || key=="c"){
-
-        //wsadzic switcha w zaleznosci od kanalu
-
-        channel1.push({
-            key,
-            time
-        });
-
-        playSound(key);
+    switch(currChanell){
+        case "startChannel1":
+            if(startChannel1Btn.disabled = false){
+                channel1.push({
+                    key,
+                    time
+                });
+            }
+        break;
+        case "startChannel2":
+            if(startChannel2Btn.disabled = false){
+                channel2.push({
+                    key,
+                    time
+                });
+            }
+        break;
+        case "startChannel3":
+            if(startChannel3Btn.disabled = false){
+                channel3.push({
+                    key,
+                    time
+                });
+            }
+        break;
+        case "startChannel4":
+            if(startChannel4Btn.disabled = false){
+                channel4.push({
+                    key,
+                    time
+                });
+            }
+        break;
     }
 
-    else window.alert("Wrong key!");
+    playSound(key);
+
+
+    // if(key=="q" || key=="w" || key=="e" || key=="a" || key=="s" || key=="d"
+    // || key=="z" || key=="x" || key=="c"){
+
+    //     playSound(key);
+    // }
+    // else window.alert("Wrong key!");
 }
 
 function removeTransition(e) {
@@ -211,7 +247,7 @@ function onPlayChanel():void{
     playChannel();
 }
 
-// jak jest play to reszta buttonow disabled
+// jak jest play to reszta buttonow disabled until nie przestanie grac
 function playChannel():void {
     let prevTime = 0;
 
