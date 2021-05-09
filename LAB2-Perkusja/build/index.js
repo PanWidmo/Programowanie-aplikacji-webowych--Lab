@@ -2,6 +2,11 @@ var channel1 = [];
 var channel2 = [];
 var channel3 = [];
 var channel4 = [];
+var timeChannel1;
+var timeChannel2;
+var timeChannel3;
+var timeChannel4;
+var currChanell;
 var sound1 = document.querySelector('[data-sound="boom"]');
 var sound2 = document.querySelector('[data-sound="clap"]');
 var sound3 = document.querySelector('[data-sound="hithat"]');
@@ -50,17 +55,46 @@ playChannel4Btn.addEventListener('click', onPlayChanel);
 function onKeyDown(ev) {
     var key = ev.key;
     var time = ev.timeStamp;
-    if (key == "q" || key == "w" || key == "e" || key == "a" || key == "s" || key == "d"
-        || key == "z" || key == "x" || key == "c") {
-        //wsadzic switcha w zaleznosci od kanalu
-        channel1.push({
-            key: key,
-            time: time
-        });
-        playSound(key);
+    switch (currChanell) {
+        case "startChannel1":
+            if (startChannel1Btn.disabled = false) {
+                channel1.push({
+                    key: key,
+                    time: time
+                });
+            }
+            break;
+        case "startChannel2":
+            if (startChannel2Btn.disabled = false) {
+                channel2.push({
+                    key: key,
+                    time: time
+                });
+            }
+            break;
+        case "startChannel3":
+            if (startChannel3Btn.disabled = false) {
+                channel3.push({
+                    key: key,
+                    time: time
+                });
+            }
+            break;
+        case "startChannel4":
+            if (startChannel4Btn.disabled = false) {
+                channel4.push({
+                    key: key,
+                    time: time
+                });
+            }
+            break;
     }
-    else
-        window.alert("Wrong key!");
+    playSound(key);
+    // if(key=="q" || key=="w" || key=="e" || key=="a" || key=="s" || key=="d"
+    // || key=="z" || key=="x" || key=="c"){
+    //     playSound(key);
+    // }
+    // else window.alert("Wrong key!");
 }
 function removeTransition(e) {
     if (e.propertyName !== 'transform') {
@@ -180,7 +214,7 @@ function stopRecording(event) {
 function onPlayChanel() {
     playChannel();
 }
-// jak jest play to reszta buttonow disabled
+// jak jest play to reszta buttonow disabled until nie przestanie grac
 function playChannel() {
     var prevTime = 0;
     channel1.forEach(function (sound) {

@@ -106,7 +106,6 @@ function onKeyDown(ev:KeyboardEvent): void {
 
     playSound(key);
 
-
     // if(key=="q" || key=="w" || key=="e" || key=="a" || key=="s" || key=="d"
     // || key=="z" || key=="x" || key=="c"){
 
