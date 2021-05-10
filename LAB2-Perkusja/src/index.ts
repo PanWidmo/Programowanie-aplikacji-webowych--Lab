@@ -114,6 +114,7 @@ function onKeyDown(ev:KeyboardEvent): void {
     // else window.alert("Wrong key!");
 }
 
+
 function removeTransition(e) {
     if (e.propertyName !== 'transform') {
         return;
