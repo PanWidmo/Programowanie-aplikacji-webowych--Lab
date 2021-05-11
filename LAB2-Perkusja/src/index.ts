@@ -53,15 +53,17 @@ startChannel2Btn.addEventListener('click', startRecording);
 startChannel3Btn.addEventListener('click', startRecording);
 startChannel4Btn.addEventListener('click', startRecording);
 
+stopChannel1Btn.disabled = true;
+
 stopChannel1Btn.addEventListener('click', stopRecording);
 stopChannel2Btn.addEventListener('click', stopRecording);
 stopChannel3Btn.addEventListener('click', stopRecording);
 stopChannel4Btn.addEventListener('click', stopRecording);
 
-playChannel1Btn.addEventListener('click', onPlayChanel);
-playChannel2Btn.addEventListener('click', onPlayChanel);
-playChannel3Btn.addEventListener('click', onPlayChanel);
-playChannel4Btn.addEventListener('click', onPlayChanel);
+playChannel1Btn.addEventListener('click', onPlayChannel);
+playChannel2Btn.addEventListener('click', onPlayChannel);
+playChannel3Btn.addEventListener('click', onPlayChannel);
+playChannel4Btn.addEventListener('click', onPlayChannel);
 
 //dodac walidacje dla capslocka (alert, ze jest wlaczony i poprosic o wylaczenie?)
 
@@ -71,36 +73,41 @@ function onKeyDown(ev:KeyboardEvent): void {
 
     switch(currChanell){
         case "startChannel1":
-            if(startChannel1Btn.disabled = false){
+            if(startChannel1Btn.disabled == true && stopChannel1Btn.disabled == false){
                 channel1.push({
                     key,
                     time
+
                 });
             }
+            console.log(channel1);
         break;
         case "startChannel2":
-            if(startChannel2Btn.disabled = false){
+            if(startChannel2Btn.disabled == true){
                 channel2.push({
                     key,
                     time
                 });
             }
+            console.log(channel2);
         break;
         case "startChannel3":
-            if(startChannel3Btn.disabled = false){
+            if(startChannel3Btn.disabled == true){
                 channel3.push({
                     key,
                     time
                 });
             }
+            console.log(channel3);
         break;
         case "startChannel4":
-            if(startChannel4Btn.disabled = false){
+            if(startChannel4Btn.disabled == true){
                 channel4.push({
                     key,
                     time
                 });
             }
+            console.log(channel4);
         break;
     }
 
@@ -174,8 +181,9 @@ function playSound(key:string) {
 }
 
 function startRecording(event){
+    currChanell = event.target.id;
 
-    switch(event.target.id){
+    switch(currChanell){
         case "startChannel1":
             startChannel1Btn.disabled = true;
             stopChannel1Btn.disabled = false;
@@ -243,8 +251,29 @@ function stopRecording(event){
 }
 
 
-function onPlayChanel():void{
-    playChannel();
+function onPlayChannel(event):void{
+    // playChannel();
+    switch(event.target.id){
+        case "playChannel1":
+            startChannel1Btn.disabled = true;
+
+            let prevTime = 0;
+            channel1.forEach(sound => {
+            const timeout = sound.time - prevTime;
+            setTimeout(() => playSound(sound.key), timeout);
+            });
+        break;
+        case "playChannel2":
+            console.log("playing channel2");
+        break;
+        case "playChannel3":
+            console.log("playing channel3");
+        break;
+        case "playChannel4":
+            console.log("playing channel4");
+        break;
+    }
+
 }
 
 // jak jest play to reszta buttonow disabled until nie przestanie grac
@@ -255,4 +284,5 @@ function playChannel():void {
         const timeout = sound.time - prevTime;
         setTimeout(() => playSound(sound.key), timeout);
     });
+
 }
