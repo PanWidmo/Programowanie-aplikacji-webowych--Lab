@@ -37,7 +37,6 @@ export class App {
         this.getCityWeather(city);
     }
 
-    //DO PODZIELENIA!
     //tworzenie nowego okna pogodowego i zapis do local storage
     async getCityWeather(city: string) {
         const weather = await this.getWeather(city);
