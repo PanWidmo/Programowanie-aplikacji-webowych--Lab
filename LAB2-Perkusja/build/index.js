@@ -2,7 +2,7 @@ var channel1 = [];
 var channel2 = [];
 var channel3 = [];
 var channel4 = [];
-var currChanell;
+var currentChannel;
 var sound1 = document.querySelector('[data-sound="boom"]');
 var sound2 = document.querySelector('[data-sound="clap"]');
 var sound3 = document.querySelector('[data-sound="hithat"]');
@@ -47,6 +47,10 @@ stopChannel1Btn.addEventListener('click', stopRecording);
 stopChannel2Btn.addEventListener('click', stopRecording);
 stopChannel3Btn.addEventListener('click', stopRecording);
 stopChannel4Btn.addEventListener('click', stopRecording);
+playChannel1Btn.disabled = true;
+playChannel2Btn.disabled = true;
+playChannel3Btn.disabled = true;
+playChannel4Btn.disabled = true;
 playChannel1Btn.addEventListener('click', PlayChannel);
 playChannel2Btn.addEventListener('click', PlayChannel);
 playChannel3Btn.addEventListener('click', PlayChannel);
@@ -57,16 +61,14 @@ function onKeyDown(ev) {
     if (key == "q" || key == "Q" || key == "w" || key == "W" || key == "e" || key == "E" || key == "a" || key == "A" ||
         key == "s" || key == "S" || key == "d" || key == "D" || key == "z" || key == "Z" || key == "x" || key == "X" ||
         key == "c" || key == "C") {
-        switch (currChanell) {
+        switch (currentChannel) {
             case "startChannel1":
                 if (startChannel1Btn.disabled == true && stopChannel1Btn.disabled == false) {
-                    console.log(time);
                     channel1.push({
                         key: key,
                         time: time
                     });
                 }
-                console.log(channel1);
                 break;
             case "startChannel2":
                 if (startChannel2Btn.disabled == true) {
@@ -75,7 +77,6 @@ function onKeyDown(ev) {
                         time: time
                     });
                 }
-                console.log(channel2);
                 break;
             case "startChannel3":
                 if (startChannel3Btn.disabled == true) {
@@ -84,7 +85,6 @@ function onKeyDown(ev) {
                         time: time
                     });
                 }
-                console.log(channel3);
                 break;
             case "startChannel4":
                 if (startChannel4Btn.disabled == true) {
@@ -93,7 +93,6 @@ function onKeyDown(ev) {
                         time: time
                     });
                 }
-                console.log(channel4);
                 break;
         }
         playSound(key);
@@ -166,18 +165,15 @@ function playSound(key) {
     }
 }
 function startRecording(event) {
-    currChanell = event.target.id;
-    switch (currChanell) {
+    currentChannel = event.target.id;
+    switch (currentChannel) {
         case "startChannel1":
             startChannel1Btn.disabled = true;
             stopChannel1Btn.disabled = false;
             playChannel1Btn.disabled = true;
             startChannel2Btn.disabled = true;
-            playChannel2Btn.disabled = true;
             startChannel3Btn.disabled = true;
-            playChannel3Btn.disabled = true;
             startChannel4Btn.disabled = true;
-            playChannel4Btn.disabled = true;
             while (channel1.length > 0) {
                 channel1.pop();
             }
@@ -187,11 +183,8 @@ function startRecording(event) {
             stopChannel2Btn.disabled = false;
             playChannel2Btn.disabled = true;
             startChannel1Btn.disabled = true;
-            playChannel1Btn.disabled = true;
             startChannel3Btn.disabled = true;
-            playChannel3Btn.disabled = true;
             startChannel4Btn.disabled = true;
-            playChannel4Btn.disabled = true;
             while (channel2.length > 0) {
                 channel2.pop();
             }
@@ -201,11 +194,8 @@ function startRecording(event) {
             stopChannel3Btn.disabled = false;
             playChannel3Btn.disabled = true;
             startChannel1Btn.disabled = true;
-            playChannel1Btn.disabled = true;
             startChannel2Btn.disabled = true;
-            playChannel2Btn.disabled = true;
             startChannel4Btn.disabled = true;
-            playChannel4Btn.disabled = true;
             while (channel3.length > 0) {
                 channel3.pop();
             }
@@ -215,11 +205,8 @@ function startRecording(event) {
             stopChannel4Btn.disabled = false;
             playChannel4Btn.disabled = true;
             startChannel1Btn.disabled = true;
-            playChannel1Btn.disabled = true;
             startChannel2Btn.disabled = true;
-            playChannel2Btn.disabled = true;
             startChannel3Btn.disabled = true;
-            playChannel3Btn.disabled = true;
             while (channel4.length > 0) {
                 channel4.pop();
             }
@@ -231,46 +218,42 @@ function stopRecording(event) {
         case "stopChannel1":
             startChannel1Btn.disabled = false;
             stopChannel1Btn.disabled = true;
-            playChannel1Btn.disabled = false;
             startChannel2Btn.disabled = false;
-            playChannel2Btn.disabled = false;
             startChannel3Btn.disabled = false;
-            playChannel3Btn.disabled = false;
             startChannel4Btn.disabled = false;
-            playChannel4Btn.disabled = false;
+            if (channel1.length > 0) {
+                playChannel1Btn.disabled = false;
+            }
             break;
         case "stopChannel2":
             startChannel2Btn.disabled = false;
             stopChannel2Btn.disabled = true;
-            playChannel2Btn.disabled = false;
             startChannel1Btn.disabled = false;
-            playChannel1Btn.disabled = false;
             startChannel3Btn.disabled = false;
-            playChannel3Btn.disabled = false;
             startChannel4Btn.disabled = false;
-            playChannel4Btn.disabled = false;
+            if (channel2.length > 0) {
+                playChannel2Btn.disabled = false;
+            }
             break;
         case "stopChannel3":
             startChannel3Btn.disabled = false;
             stopChannel3Btn.disabled = true;
-            playChannel3Btn.disabled = false;
             startChannel1Btn.disabled = false;
-            playChannel1Btn.disabled = false;
             startChannel2Btn.disabled = false;
-            playChannel2Btn.disabled = false;
             startChannel4Btn.disabled = false;
-            playChannel4Btn.disabled = false;
+            if (channel3.length > 0) {
+                playChannel3Btn.disabled = false;
+            }
             break;
         case "stopChannel4":
             startChannel4Btn.disabled = false;
             stopChannel4Btn.disabled = true;
-            playChannel4Btn.disabled = false;
             startChannel1Btn.disabled = false;
-            playChannel1Btn.disabled = false;
             startChannel2Btn.disabled = false;
-            playChannel2Btn.disabled = false;
             startChannel3Btn.disabled = false;
-            playChannel3Btn.disabled = false;
+            if (channel4.length > 0) {
+                playChannel4Btn.disabled = false;
+            }
             break;
     }
 }
@@ -280,7 +263,15 @@ function PlayChannel(event) {
             channel1.forEach(function (sound) {
                 var timeout = sound.time - channel1[0].time;
                 setTimeout(function () { return playSound(sound.key); }, timeout);
+                setTimeout(function () { return playChannel1Btn.disabled = true; }, timeout);
+                if (timeout == 0) {
+                    playChannel1Btn.disabled = false;
+                }
+                //playChannel1Btn.disabled = true;
+                //startChannel1Btn.disabled = true;
             });
+            //setTimeout(()=> playChannel1Btn.disabled = false, channel1[0].time);
+            //setTimeout(()=> startChannel1Btn.disabled = false, channel1[0].time);
             break;
         case "playChannel2":
             channel2.forEach(function (sound) {
@@ -304,4 +295,3 @@ function PlayChannel(event) {
             break;
     }
 }
-// jak jest play to reszta buttonow disabled until nie przestanie grac
