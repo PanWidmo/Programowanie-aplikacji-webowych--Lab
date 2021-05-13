@@ -263,35 +263,55 @@ function PlayChannel(event) {
             channel1.forEach(function (sound) {
                 var timeout = sound.time - channel1[0].time;
                 setTimeout(function () { return playSound(sound.key); }, timeout);
-                setTimeout(function () { return playChannel1Btn.disabled = true; }, timeout);
-                if (timeout == 0) {
-                    playChannel1Btn.disabled = false;
-                }
-                //playChannel1Btn.disabled = true;
-                //startChannel1Btn.disabled = true;
+                playChannel1Btn.disabled = true;
             });
-            //setTimeout(()=> playChannel1Btn.disabled = false, channel1[0].time);
-            //setTimeout(()=> startChannel1Btn.disabled = false, channel1[0].time);
+            var x1 = channel1[0].time;
+            var y1 = channel1.length;
+            var z1 = channel1[y1 - 1].time;
+            //200 sec forced delay
+            var a1 = z1 - x1 + 200;
+            setTimeout(function () { return playChannel1Btn.disabled = false; }, a1);
             break;
         case "playChannel2":
             channel2.forEach(function (sound) {
                 var timeout = sound.time - channel2[0].time;
                 setTimeout(function () { return playSound(sound.key); }, timeout);
+                playChannel2Btn.disabled = true;
             });
+            var x2 = channel2[0].time;
+            var y2 = channel2.length;
+            var z2 = channel2[y2 - 1].time;
+            //200 sec forced delay
+            var a2 = z2 - x2 + 200;
+            setTimeout(function () { return playChannel2Btn.disabled = false; }, a2);
             break;
         case "playChannel3":
             channel3.forEach(function (sound) {
                 var timeout = sound.time - channel3[0].time;
                 ;
                 setTimeout(function () { return playSound(sound.key); }, timeout);
+                playChannel3Btn.disabled = true;
             });
+            var x3 = channel3[0].time;
+            var y3 = channel3.length;
+            var z3 = channel3[y3 - 1].time;
+            //200 sec forced delay
+            var a3 = z3 - x3 + 200;
+            setTimeout(function () { return playChannel3Btn.disabled = false; }, a3);
             break;
         case "playChannel4":
             channel4.forEach(function (sound) {
                 var timeout = sound.time - channel4[0].time;
                 ;
                 setTimeout(function () { return playSound(sound.key); }, timeout);
+                playChannel4Btn.disabled = true;
             });
+            var x4 = channel4[0].time;
+            var y4 = channel4.length;
+            var z4 = channel4[y4 - 1].time;
+            //200 sec forced delay
+            var a4 = z4 - x4 + 200;
+            setTimeout(function () { return playChannel4Btn.disabled = false; }, a4);
             break;
     }
 }

@@ -116,7 +116,6 @@ function onKeyDown(ev:KeyboardEvent): void {
     else window.alert("Wrong key!");
 }
 
-
 function removeTransition(e) {
     if (e.propertyName !== 'transform') {
         return;
@@ -289,36 +288,63 @@ function PlayChannel(event):void{
     switch(event.target.id){
         case "playChannel1":
             channel1.forEach(sound => {
-            const timeout = sound.time - channel1[0].time;
-            setTimeout(() => playSound(sound.key), timeout);
-
-            setTimeout(()=> playChannel1Btn.disabled = true, timeout);
-            if(timeout == 0){
-                playChannel1Btn.disabled = false;
-            }
-            //playChannel1Btn.disabled = true;
-            //startChannel1Btn.disabled = true;
+                const timeout = sound.time - channel1[0].time;
+                setTimeout(() => playSound(sound.key), timeout);
+                playChannel1Btn.disabled = true;
             });
-            //setTimeout(()=> playChannel1Btn.disabled = false, channel1[0].time);
-            //setTimeout(()=> startChannel1Btn.disabled = false, channel1[0].time);
+
+            const x1 = channel1[0].time;
+            const y1 = channel1.length;
+            const z1 = channel1[y1-1].time;
+            //200 sec forced delay
+            const a1 = z1 - x1 + 200;
+
+            setTimeout(()=> playChannel1Btn.disabled = false, a1);
         break;
         case "playChannel2":
             channel2.forEach(sound => {
             const timeout = sound.time - channel2[0].time;
             setTimeout(() => playSound(sound.key), timeout);
+            playChannel2Btn.disabled = true;
             });
+
+            const x2 = channel2[0].time;
+            const y2 = channel2.length;
+            const z2 = channel2[y2-1].time;
+            //200 sec forced delay
+            const a2 = z2 - x2 + 200;
+
+            setTimeout(()=> playChannel2Btn.disabled = false, a2);
         break;
         case "playChannel3":
             channel3.forEach(sound => {
             const timeout = sound.time - channel3[0].time;;
             setTimeout(() => playSound(sound.key), timeout);
+            playChannel3Btn.disabled = true;
             });
+
+            const x3 = channel3[0].time;
+            const y3 = channel3.length;
+            const z3 = channel3[y3-1].time;
+            //200 sec forced delay
+            const a3 = z3 - x3 + 200;
+
+            setTimeout(()=> playChannel3Btn.disabled = false, a3);
         break;
         case "playChannel4":
             channel4.forEach(sound => {
             const timeout = sound.time - channel4[0].time;;
             setTimeout(() => playSound(sound.key), timeout);
+            playChannel4Btn.disabled = true;
             });
+
+            const x4 = channel4[0].time;
+            const y4 = channel4.length;
+            const z4 = channel4[y4-1].time;
+            //200 sec forced delay
+            const a4 = z4 - x4 + 200;
+
+            setTimeout(()=> playChannel4Btn.disabled = false, a4);
         break;
     }
 }
