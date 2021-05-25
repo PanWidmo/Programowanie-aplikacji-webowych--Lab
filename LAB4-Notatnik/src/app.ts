@@ -1,6 +1,7 @@
 export class App {
     boxNumber: number = 0;
 
+
     constructor() {
         this.onClickButton();
         // this.fetchFromStorage("T");
@@ -29,10 +30,10 @@ export class App {
         const noteDescription = <HTMLInputElement>document.getElementById('description');
         const description = noteDescription.value;
 
-        this.createNote();
+        this.createNote(title,description);
     }
 
-    createNote(){
+    createNote(title:string,description:string){
 
         //tworzenie szkieletu
         const noteBox = document.createElement('div');
@@ -45,8 +46,8 @@ export class App {
         noteBox.classList.add('noteBox');
 
         //uzupelnienie szkieletu danymi
-        noteBoxTitle.innerHTML = "title";
-        noteBoxDescription.innerHTML = "description";
+        noteBoxTitle.innerHTML = title;
+        noteBoxDescription.innerHTML = description;
 
         //wrzucenie szkieletu z danymi na strone
         const space = document.getElementById('notes');
