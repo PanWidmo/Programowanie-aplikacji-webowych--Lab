@@ -21,15 +21,7 @@ export class App {
         });
     }
 
-//     //pobieranie danych z api i zwracanie obiektu weatherData (json)
-//     async getWeather(city: string): Promise<any> {
-//         const openWeatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${this.opwApiKey}`;
-//         const weatherResponse = await fetch(openWeatherUrl);
-//         const weatherData = await weatherResponse.json();
-//         return weatherData;
-//     }
-
-//     //pobieranie nazwy miasta z inputa i wywolywanie getCityWeather
+    //pobieranie danych z inputa i wywolywanie createNote
     getNote(){
         const noteTitle = <HTMLInputElement>document.getElementById('title');
         const title = noteTitle.value;
@@ -37,59 +29,40 @@ export class App {
         const noteDescription = <HTMLInputElement>document.getElementById('description');
         const description = noteDescription.value;
 
-        // this.getCityWeather(city);
+        this.createNote();
     }
 
     createNote(){
-        // const weather = await this.getWeather(city);
 
-        // //pobieranie danych z jsona
-        // const name = weather.name;
-        // const img =  `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`;
-        // const temp = Math.round(weather.main.temp - 273.15).toString();
-        // const sky = weather.weather[0].main;
-        // const pressure = weather.main.pressure;
-        // const humidity = weather.main.humidity;
+        //tworzenie szkieletu
+        const noteBox = document.createElement('div');
+        noteBox.className = 'noteBoxClass'
+        noteBox.setAttribute("id","noteBoxId" + this.boxNumber);
+        const noteBoxTitle = document.createElement('h1');
+        const noteBoxDescription = document.createElement('p');
 
-        // //tworzenie szkieletu
-        // const weatherBox = document.createElement('div');
-        // weatherBox.className = 'weatherBoxClass';
-        // weatherBox.setAttribute("id","weatherBoxId" + this.boxNumber);
-        // const weatherCityName = document.createElement('h1');
-        // const weatherCityImg = document.createElement('img');
-        // const weatherCityTemp = document.createElement('p');
-        // const weatherCitySky = document.createElement('p');
-        // const weatherCityPressure = document.createElement('p');
-        // const weatherCityHumidity = document.createElement('p');
+        //dodanie styli do szkieletu
+        noteBox.classList.add('noteBox');
 
-        // //dodanie styli do szkieletu
-        // weatherBox.classList.add('weatherBox');
+        //uzupelnienie szkieletu danymi
+        noteBoxTitle.innerHTML = "title";
+        noteBoxDescription.innerHTML = "description";
 
-        // //uzupelnienie szkieletu danymi
-        // weatherCityName.innerHTML = name;
-        // weatherCityImg.src = img;
-        // weatherCityTemp.innerHTML = "Temp: " + temp +"&deg;C";
-        // weatherCitySky.innerHTML = "Sky: " + sky;
-        // weatherCityPressure.innerHTML = "Pressure: " + pressure + " hPA";
-        // weatherCityHumidity.innerHTML = "Humidity: " + humidity + "%";
+        //wrzucenie szkieletu z danymi na strone
+        const space = document.getElementById('notes');
+        space.appendChild(noteBox);
+        noteBox.appendChild(noteBoxTitle);
+        noteBox.appendChild(noteBoxDescription);
 
-        // //wrzucenie szkieletu z danymi na strone
-        // const space = document.getElementById('weathers');
-        // space.appendChild(weatherBox);
-        // weatherBox.appendChild(weatherCityName);
-        // weatherBox.appendChild(weatherCityImg);
-        // weatherBox.appendChild(weatherCityTemp);
-        // weatherBox.appendChild(weatherCitySky);
-        // weatherBox.appendChild(weatherCityPressure);
-        // weatherBox.appendChild(weatherCityHumidity);
-
-        // //czyszczenie inputa i zapisanie do pamieci
-        // const cityInput = <HTMLInputElement>document.getElementById("cityName");
-        // cityInput.value = "";
+        //czyszczenie inputa i zapisanie do pamieci
+        const noteTitle = <HTMLInputElement>document.getElementById("title");
+        const noteDescription = <HTMLInputElement>document.getElementById("description");
+        noteTitle.value = "";
+        noteDescription.value="";
         // this.saveData(weather);
     }
 
-//     //tworzenie nowego okna pogodowego i zapis do local storage
+    //tworzenie nowego okna pogodowego i zapis do local storage
 //     async getCityWeather(city: string) {
 //         const weather = await this.getWeather(city);
 
@@ -211,11 +184,11 @@ export class App {
 
 //     }
 
-//     //zapis do local storage
-//     saveData(data: any) {
-//         this.boxNumber++;
-//         localStorage.setItem('weatherData' + this.boxNumber, JSON.stringify(data));
-//     }
+    // //zapis do local storage
+    // saveData(data: any) {
+    //     this.boxNumber++;
+    //     localStorage.setItem('weatherData' + this.boxNumber, JSON.stringify(data));
+    // }
 
 //     //wyciaganie z pamieci
 //     getData() {
