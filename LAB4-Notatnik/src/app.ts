@@ -60,7 +60,7 @@ export class App {
         const noteDescription = <HTMLInputElement>document.getElementById("description");
         noteTitle.value = "";
         noteDescription.value="";
-        // this.saveData(weather);
+        this.saveData(title,description);
     }
 
     //tworzenie nowego okna pogodowego i zapis do local storage
@@ -185,11 +185,11 @@ export class App {
 
 //     }
 
-    // //zapis do local storage
-    // saveData(data: any) {
-    //     this.boxNumber++;
-    //     localStorage.setItem('weatherData' + this.boxNumber, JSON.stringify(data));
-    // }
+    //zapis do local storage
+    saveData(title: any,description: any) {
+        this.boxNumber++;
+        localStorage.setItem('noteData' + this.boxNumber, JSON.stringify({title,description}));
+    }
 
 //     //wyciaganie z pamieci
 //     getData() {
