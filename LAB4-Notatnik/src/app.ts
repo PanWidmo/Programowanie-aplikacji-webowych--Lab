@@ -4,12 +4,12 @@ export class App {
 
     constructor() {
         this.onClickButton();
-        // this.fetchFromStorage("T");
-        // //odswiezanie co 1 min
+        this.fetchFromStorage();
+        //odswiezanie co 1 min
         // setInterval(()=> this.fetchFromStorage("N"),60000);
     }
 
-//     //dodanie miasta przez button lub enter
+    //dodanie miasta przez button lub enter
     onClickButton(){
         const addByBtn = <HTMLInputElement>document.getElementById('addBtn');
         addByBtn.addEventListener('click', (ev:Event) => this.getNote());
@@ -63,8 +63,20 @@ export class App {
         this.saveData(title,description);
     }
 
+    fetchFromStorage(){
+        this.deleteWindows();
+        const tab = localStorage.length;
+
+        for (let i = 1; i < tab; i++) {
+            let nazwa;
+            nazwa = localStorage.getItem("noteBoxId" +i);
+            const nazwa2= JSON.parse(nazwa);
+            }
+        }
+
+
     //pobieranie z localStorage
-//     async getCityWeatherFromStorage(nazwa:any,yesOrNo:string) {
+        getNotesFromStorage(nazwa:any) {
 
 //         const weather = await this.getWeather(nazwa.name);
 
@@ -115,7 +127,7 @@ export class App {
 //         if(yesOrNo === "T")
 //         this.saveData(weather);
 
-//     }
+    }
 
     //zapis do local storage
     saveData(title: any,description: any) {
@@ -133,9 +145,9 @@ export class App {
         }
     }
 
-//     //usuawnie okienek
-//     deleteWindows(){
-//         const div= document.getElementById('weathers');
-//         div.textContent = "";
-//     }
+    //usuawnie okienek
+    deleteWindows(){
+        const div= document.getElementById('notes');
+        div.textContent = "";
+    }
 }
