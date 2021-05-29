@@ -43,7 +43,6 @@ export class App {
         const noteBoxDescription = document.createElement('p');
 
         //dodanie styli do szkieletu
-        noteBox.classList.add('noteBox');
 
         //uzupelnienie szkieletu danymi
         noteBoxTitle.innerHTML = title;

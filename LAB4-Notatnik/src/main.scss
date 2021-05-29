@@ -1,13 +1,14 @@
 body {
-  background-color: lightgreen;
-  max-width: 1200;
+  max-width: 1200px;
+  margin:0 auto;
+  display: flex;
 }
 
 nav{
+  text-align:center;
   width:200px;
-  background-color: lightyellow;
-  height:500px;
-  position: absolute;
+  height:200px;
+  margin-top:50px;
 
   input{
     font-size: 20px;
@@ -15,17 +16,14 @@ nav{
 }
 
 main{
-  width:600px;
-  background: lightyellow;
+  width:1000px;
+  display: flex;
+  flex-direction: column;
+  background: lightgreen;
   font-family: arial;
-  text-align: center;
   margin:0 auto;
-  padding-bottom: 10px;
   font-size: 20px;
-  display: grid;
-  grid-template-rows: 50px 1fr 1fr;
   align-items: center;
-  text-align: center;
 
 
   input{
@@ -33,30 +31,45 @@ main{
   }
 
   #title{
-    grid-row: 1;
     height:30px;
+    width:30%;
   }
 
   #description{
-    grid-row: 2;
-    height:40px;
+    height:30px;
+    width:60%;
   }
 
   #addBtn{
-    grid-row: 3;
     height: 50px;
-    width: 150px;
-    margin:0 auto;
+    width: 120px;
   }
 
   #notes{
-
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    border-top:2px solid green;
+    margin-top:10px;
+    padding-top:10px;
   }
 
   .noteBoxClass{
-    width:140px;
+    width:242px;
+    min-height: 100px;
     border:2px solid red;
-    margin-top: 20px;
+    margin: 5px 2px;
+    font-size: 12px;
+    text-align: center;
+
+    h1{
+      font-size: 20px;
+    }
+
+    p{
+      max-width:242px;
+      font-size: 14px;
+    }
   }
 
 }
