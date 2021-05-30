@@ -1,0 +1,75 @@
+body {
+  max-width: 1200px;
+  margin:0 auto;
+  display: flex;
+}
+
+nav{
+  text-align:center;
+  width:200px;
+  height:200px;
+  margin-top:50px;
+
+  input{
+    font-size: 20px;
+  }
+}
+
+main{
+  width:1000px;
+  display: flex;
+  flex-direction: column;
+  background: lightgreen;
+  font-family: arial;
+  margin:0 auto;
+  font-size: 20px;
+  align-items: center;
+
+
+  input{
+    margin: 5px 10px;
+  }
+
+  #title{
+    height:30px;
+    width:30%;
+  }
+
+  #description{
+    height:30px;
+    width:60%;
+  }
+
+  #addBtn{
+    height: 50px;
+    width: 120px;
+  }
+
+  #notes{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    border-top:2px solid green;
+    margin-top:10px;
+    padding-top:10px;
+  }
+
+  .noteBoxClass{
+    width:242px;
+    min-height: 100px;
+    border:2px solid red;
+    margin: 5px 2px;
+    font-size: 12px;
+    text-align: center;
+
+    h1{
+      font-size: 20px;
+    }
+
+    p{
+      max-width:242px;
+      font-size: 14px;
+    }
+  }
+
+}
