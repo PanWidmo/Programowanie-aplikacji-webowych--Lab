@@ -3,5 +3,6 @@ export interface IAppStorage{
     title: string;
     description: string;
     color: string;
-    date: Date;
+    date: string;
+    isPinned: boolean;
 }
