@@ -1,14 +1,23 @@
 import {IAppStorage} from "./IAppStorage";
+import {Notes} from "./Notes";
 export class AppStorage{
     notes: IAppStorage[] = [];
 
     //sprawdzanie ilosci elementow w tablicy
-    localStorageLength(){
-        const items = localStorage.length;
-        if(items == 0 ){
+    lastIdFromStorage(){
+        if(localStorage.getItem("note") === null){
             return 0;
         }
-        else return items;
+        else {
+            const x = JSON.parse(localStorage.getItem("note"));
+            let id:number = 1;
+            x.map((x: any) =>{
+                if(x.id > id) {
+                    id=x.id;
+                }
+            })
+            return id;
+        }
     }
 
     //szkielet notatki
@@ -20,10 +29,10 @@ export class AppStorage{
         const colorName= <HTMLSelectElement>document.getElementById('color');
         const color = colorName.value;
 
-        const x= this.localStorageLength();
+        const x= this.lastIdFromStorage();
 
         const object: IAppStorage = {
-            id: x,
+            id: x+1,
             title: title,
             description: description,
             color: color,
@@ -33,23 +42,45 @@ export class AppStorage{
 
         this.saveDataToLocalStorage(object);
 
+        const divId = document.getElementById('notes');
+        divId.innerHTML = "";
+
+        const y = new Notes;
+        y.notesFromLocalStorage();
+
     }
 
     //zapis do localStorage
     saveDataToLocalStorage(addNewNote: any) {
-        this.notes.push(addNewNote);
-        localStorage.setItem("note"+this.localStorageLength(), JSON.stringify(addNewNote));
+        if(localStorage.getItem("note") === null){
+            this.notes.push(addNewNote);
+            localStorage.setItem("note", JSON.stringify(this.notes));
+        }
+        else {
+            const notes2: IAppStorage[] = [];
+            const a = JSON.parse(localStorage.getItem("note"));
+            a.map((x:any) =>{
+                notes2.push(x);
+            })
+            notes2.push(addNewNote);
+            localStorage.setItem("note",JSON.stringify(notes2));
+
+        }
+
     }
 
     //wyciaganie z localStorage
     fetchDataFromLocalStorage(){
-        const notesInStorage = localStorage.length;
-        const tab:any[] = [];
-
-        for (let i = 1; i < notesInStorage; i++) {
-            tab.push(JSON.parse(localStorage.getItem("note" +i)));
+        if(localStorage.getItem("note") === null ){
+            return 0;
         }
-        return tab;
+        else return JSON.parse(localStorage.getItem("note"));
+
+    }
+
+    //usuwanie z localStorage
+    removeFromLocalStorage(data:any) {
+        localStorage.removeItem(data);
     }
 
 
