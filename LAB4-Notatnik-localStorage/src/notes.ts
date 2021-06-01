@@ -7,7 +7,6 @@ export class Notes{
         const data = new AppStorage();
         console.log(data);
 
-
     }
 
 

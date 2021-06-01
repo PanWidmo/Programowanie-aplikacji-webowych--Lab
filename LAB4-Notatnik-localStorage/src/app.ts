@@ -1,5 +1,6 @@
-import {Notes} from './notes';
 import {AppStorage} from './appStorage';
+import {Note} from './note';
+import {Notes} from './notes';
 export class App {
 
     constructor(){
@@ -14,15 +15,15 @@ export class App {
 
     //przerobic tak, zeby AppStorage przechodzilo przez note.ts i tu Note import
     newNotes(){
-        const tmp = new AppStorage();
+        const tmp = new Note();
 
         const addByBtn = <HTMLInputElement>document.getElementById('addBtn');
-        addByBtn.addEventListener('click', (ev:Event) => tmp.addNewNote());
+        addByBtn.addEventListener('click', (ev:Event) => tmp.newNote());
 
         const addByEnter = document.body;
         addByEnter.addEventListener('keydown', (ev:KeyboardEvent) => {
             if(ev.key === 'Enter'){
-                tmp.addNewNote();
+                tmp.newNote();
             }
         });
     }

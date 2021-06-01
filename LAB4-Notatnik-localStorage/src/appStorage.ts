@@ -9,17 +9,17 @@ export class AppStorage{
     // }
 
     //dodanie notatki przez button lub enter
-    onClickButton(){
-        const addByBtn = <HTMLInputElement>document.getElementById('addBtn');
-        addByBtn.addEventListener('click', (ev:Event) => this.addNewNote());
+    // onClickButton(){
+    //     const addByBtn = <HTMLInputElement>document.getElementById('addBtn');
+    //     addByBtn.addEventListener('click', (ev:Event) => this.addNewNote());
 
-        const addByEnter = document.body;
-        addByEnter.addEventListener('keydown', (ev:KeyboardEvent) => {
-            if(ev.key === 'Enter'){
-                this.addNewNote();
-            }
-        });
-    }
+    //     const addByEnter = document.body;
+    //     addByEnter.addEventListener('keydown', (ev:KeyboardEvent) => {
+    //         if(ev.key === 'Enter'){
+    //             this.addNewNote();
+    //         }
+    //     });
+    // }
 
     //szkielet notatki
     async addNewNote(){
@@ -39,12 +39,12 @@ export class AppStorage{
             isPinned: false,
         }
 
-        this.saveData(object);
+        this.saveDataToLocalStorage(object);
 
     }
 
     //zapis do localStorage
-    saveData(addNewNote: any) {
+    saveDataToLocalStorage(addNewNote: any) {
         this.noteNumber++;
         this.notes.push(addNewNote);
         localStorage.setItem("note"+this.noteNumber, JSON.stringify(addNewNote));
@@ -54,7 +54,7 @@ export class AppStorage{
     }
 
     //wyciaganie z localStorage
-    fetchNotesFromStorage(){
+    fetchDataFromLocalStorage(){
         const notesInStorage = localStorage.length;
 
         for (let i = 1; i < notesInStorage; i++) {
@@ -62,5 +62,7 @@ export class AppStorage{
             this.addNewNote();
         }
     }
+
+    //trzeba bedzie zamienic boxNumber na liczenie ile elementow jest w tablicy notes (dodac nowa metoda)
 
 }
