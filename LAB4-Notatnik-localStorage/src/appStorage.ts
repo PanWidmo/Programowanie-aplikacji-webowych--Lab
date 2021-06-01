@@ -2,23 +2,14 @@ import {IAppStorage} from "./IAppStorage";
 export class AppStorage{
     notes: IAppStorage[] = [];
 
-    // constructor() {
-    //     this.onClickButton();
-    //     this.fetchNotesFromStorage();
-    // }
-
-    //dodanie notatki przez button lub enter
-    // onClickButton(){
-    //     const addByBtn = <HTMLInputElement>document.getElementById('addBtn');
-    //     addByBtn.addEventListener('click', (ev:Event) => this.addNewNote());
-
-    //     const addByEnter = document.body;
-    //     addByEnter.addEventListener('keydown', (ev:KeyboardEvent) => {
-    //         if(ev.key === 'Enter'){
-    //             this.addNewNote();
-    //         }
-    //     });
-    // }
+    //sprawdzanie ilosci elementow w tablicy
+    localStorageLength(){
+        const items = localStorage.length;
+        if(items == 0 ){
+            return 0;
+        }
+        else return items;
+    }
 
     //szkielet notatki
     async addNewNote(){
@@ -30,7 +21,6 @@ export class AppStorage{
         const color = colorName.value;
 
         const x= this.localStorageLength();
-        console.log(x);
 
         const object: IAppStorage = {
             id: x,
@@ -49,28 +39,19 @@ export class AppStorage{
     saveDataToLocalStorage(addNewNote: any) {
         this.notes.push(addNewNote);
         localStorage.setItem("note"+this.localStorageLength(), JSON.stringify(addNewNote));
-        //sprawdzanie
-        // const result = JSON.parse(localStorage.getItem("note"+this.noteNumber));
-        // console.log(result);
     }
 
     //wyciaganie z localStorage
     fetchDataFromLocalStorage(){
         const notesInStorage = localStorage.length;
+        const tab:any[] = [];
 
         for (let i = 1; i < notesInStorage; i++) {
-            localStorage.getItem("note" +i);
-            this.addNewNote();
+            tab.push(JSON.parse(localStorage.getItem("note" +i)));
         }
+        return tab;
     }
 
-    //sprawdzanie ilosci elementow w tablicy
-    localStorageLength(){
-        const items = localStorage.length;
-        if(items == 0 ){
-            return 1;
-        }
-        else return items+1;
-    }
+
 
 }

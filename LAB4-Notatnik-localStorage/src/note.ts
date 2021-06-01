@@ -15,7 +15,6 @@ export class Note{
         const colorName= <HTMLSelectElement>document.getElementById('color');
         const color = colorName.value;
 
-
         //tworzenie szkieletu
         const noteBox = document.createElement('div');
         noteBox.className = 'noteBoxClass'
@@ -29,7 +28,6 @@ export class Note{
         noteBoxDescription.innerHTML = description;
         noteBoxDate.innerHTML=date;
         noteBox.style.borderColor = color;
-        //tu dodac jeszcze kolor
 
         //wrzucenie szkieletu z danymi na strone
         const space = document.getElementById('notes');
@@ -39,8 +37,8 @@ export class Note{
         noteBox.appendChild(noteBoxDate);
 
         tmp.addNewNote();
-
     }
+
 
 
 }

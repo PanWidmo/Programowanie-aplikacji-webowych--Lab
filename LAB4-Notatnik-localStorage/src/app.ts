@@ -3,16 +3,16 @@ import {Notes} from './notes';
 export class App {
 
     constructor(){
-        //this.fetchAllNotes();
-        this.newNotes();
+        this.fetchNotes();
+        this.newNote();
     }
 
-    async fetchAllNotes(){
+    async fetchNotes(){
         const tmp = new Notes();
-        tmp.getAllNotesFromStorage();
+        tmp.notesFromLocalStorage();
     }
 
-    newNotes(){
+    newNote(){
         const tmp = new Note();
 
         const addByBtn = <HTMLInputElement>document.getElementById('addBtn');
