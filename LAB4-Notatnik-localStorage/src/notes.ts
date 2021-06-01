@@ -3,9 +3,11 @@ import {AppStorage} from './appStorage';
 import {IAppStorage} from './IAppStorage';
 export class Notes{
 
+    //to fix
     async getAllNotesFromStorage(){
         const data = new AppStorage();
-        console.log(data);
+        const x = data.fetchDataFromLocalStorage();
+        //console.log(x);
 
     }
 

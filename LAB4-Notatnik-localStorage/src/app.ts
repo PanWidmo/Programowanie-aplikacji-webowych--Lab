@@ -1,10 +1,9 @@
-import {AppStorage} from './appStorage';
 import {Note} from './note';
 import {Notes} from './notes';
 export class App {
 
     constructor(){
-        this.fetchAllNotes();
+        //this.fetchAllNotes();
         this.newNotes();
     }
 
@@ -13,7 +12,6 @@ export class App {
         tmp.getAllNotesFromStorage();
     }
 
-    //przerobic tak, zeby AppStorage przechodzilo przez note.ts i tu Note import
     newNotes(){
         const tmp = new Note();
 

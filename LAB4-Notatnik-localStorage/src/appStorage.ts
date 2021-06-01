@@ -1,6 +1,5 @@
 import {IAppStorage} from "./IAppStorage";
 export class AppStorage{
-    noteNumber: number = 0;
     notes: IAppStorage[] = [];
 
     // constructor() {
@@ -30,8 +29,11 @@ export class AppStorage{
         const colorName= <HTMLSelectElement>document.getElementById('color');
         const color = colorName.value;
 
+        const x= this.localStorageLength();
+        console.log(x);
+
         const object: IAppStorage = {
-            id: this.noteNumber+1,
+            id: x,
             title: title,
             description: description,
             color: color,
@@ -45,9 +47,8 @@ export class AppStorage{
 
     //zapis do localStorage
     saveDataToLocalStorage(addNewNote: any) {
-        this.noteNumber++;
         this.notes.push(addNewNote);
-        localStorage.setItem("note"+this.noteNumber, JSON.stringify(addNewNote));
+        localStorage.setItem("note"+this.localStorageLength(), JSON.stringify(addNewNote));
         //sprawdzanie
         // const result = JSON.parse(localStorage.getItem("note"+this.noteNumber));
         // console.log(result);
@@ -58,11 +59,18 @@ export class AppStorage{
         const notesInStorage = localStorage.length;
 
         for (let i = 1; i < notesInStorage; i++) {
-            localStorage.getItem("notes" +i);
+            localStorage.getItem("note" +i);
             this.addNewNote();
         }
     }
 
-    //trzeba bedzie zamienic boxNumber na liczenie ile elementow jest w tablicy notes (dodac nowa metoda)
+    //sprawdzanie ilosci elementow w tablicy
+    localStorageLength(){
+        const items = localStorage.length;
+        if(items == 0 ){
+            return 1;
+        }
+        else return items+1;
+    }
 
 }
