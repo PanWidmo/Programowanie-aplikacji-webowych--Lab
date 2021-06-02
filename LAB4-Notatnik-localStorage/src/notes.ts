@@ -53,21 +53,51 @@ export class Notes{
 
         notePinBtn.addEventListener('click', (ev:Event) => {
 
-            if(x[i].isPinned === true){
-                console.log("pinned");
+            // wziete z deleteBtn
+            const btnId = ((ev.target as Element).id).replace("pinBtn",'');
+            const notes2: IAppStorage[] = [];
+            const a = JSON.parse(localStorage.getItem("note"));
+
+            a.map((x:any) =>{
+                if(x.id == btnId){
+
+                }
+                else {
+                    notes2.push(x);
+                }
+            })
+            if(a.length === 1){
+                localStorage.removeItem("note");
+                const notesDiv = document.getElementById('notes');
+                notesDiv.innerHTML = "";
             }
             else {
-                console.log("not pinned");
-                const space = document.getElementById('pinnedNotes');
-                space.appendChild(noteBox);
+                const notesDiv = document.getElementById('notes');
+                notesDiv.innerHTML = "";
 
-                const btn = document.getElementById("pinBtn"+x[i].id);
-                btn.setAttribute("value", "Unpin");
+                localStorage.setItem("note",JSON.stringify(notes2));
+                this.notesFromLocalStorage();
             }
 
-            // console.log("asd");
-            // const a = x[i].isPinned === true;
-            // console.log(a);
+            //old
+            // if(x[i].isPinned === true){
+            //     console.log("z pin do notes");
+            //     const space = document.getElementById('notes');
+            //     space.appendChild(noteBox);
+            //     const btn = document.getElementById("pinBtn"+x[i].id);
+            //     btn.setAttribute("value", "Pin");
+
+            //     //x[i].isPinned.innerHTML = true;
+            // }
+            // else {
+            //     console.log("z notes do pin");
+            //     const space = document.getElementById('pinnedNotes');
+            //     space.appendChild(noteBox);
+            //     const btn = document.getElementById("pinBtn"+x[i].id);
+            //     btn.setAttribute("value", "Unpin");
+
+            //     //x[i].isPinned.innerHTML = false;
+            // }
         })
 
         //uzupelnienie szkieletu danymi
