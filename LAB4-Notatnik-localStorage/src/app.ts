@@ -24,6 +24,8 @@ export class App {
                 tmp.newNote();
             }
         });
+
+
     }
 
 

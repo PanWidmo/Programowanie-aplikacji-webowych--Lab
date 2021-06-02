@@ -6,9 +6,6 @@
     <title>Notatnik</title>
   </head>
   <body>
-    <nav>
-      <input id="notesBtn" type="button" value="Notes">
-    </nav>
     <main>
       <input id="title" type="text" placeholder="Title">
       <input id="description" type="text" placeholder="Description">
@@ -22,7 +19,12 @@
       </select>
       <input id="addBtn" type="button" value="Add">
 
-      <div id="notes"></div>
+      <div id="pinnedNotes">
+        <p>Pinned:</p>
+      </div>
+      <div id="notes">
+        <p>Unpinned notes:</p>
+      </div>
     </main>
 
     <script src="index.js"></script>

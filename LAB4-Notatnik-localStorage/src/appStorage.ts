@@ -40,13 +40,19 @@ export class AppStorage{
             isPinned: false,
         }
 
-        this.saveDataToLocalStorage(object);
+        if(title == "" || description == ""){
+            alert("Enter data!");
+        }
+        else {
+            this.saveDataToLocalStorage(object);
 
-        const divId = document.getElementById('notes');
-        divId.innerHTML = "";
+            const divId = document.getElementById('notes');
+            divId.innerHTML = "";
 
-        const y = new Notes;
-        y.notesFromLocalStorage();
+            const y = new Notes;
+            y.notesFromLocalStorage();
+
+        }
 
     }
 
@@ -59,9 +65,11 @@ export class AppStorage{
         else {
             const notes2: IAppStorage[] = [];
             const a = JSON.parse(localStorage.getItem("note"));
+
             a.map((x:any) =>{
                 notes2.push(x);
             })
+
             notes2.push(addNewNote);
             localStorage.setItem("note",JSON.stringify(notes2));
 
@@ -82,7 +90,5 @@ export class AppStorage{
     removeFromLocalStorage(data:any) {
         localStorage.removeItem(data);
     }
-
-
 
 }
