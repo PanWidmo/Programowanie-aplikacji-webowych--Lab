@@ -52,6 +52,10 @@ export class AppStorage{
             const y = new Notes;
             y.notesFromLocalStorage();
 
+            noteTitle.value="";
+            noteDescription.value="";
+
+
         }
 
     }
