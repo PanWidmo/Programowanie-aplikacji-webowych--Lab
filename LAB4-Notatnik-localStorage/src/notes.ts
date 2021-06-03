@@ -87,7 +87,7 @@ export class Notes{
             //     const btn = document.getElementById("pinBtn"+x[i].id);
             //     btn.setAttribute("value", "Pin");
 
-            //     //x[i].isPinned.innerHTML = true;
+                //x[i].isPinned.innerHTML = true;
             // }
             // else {
             //     console.log("z notes do pin");
@@ -96,7 +96,7 @@ export class Notes{
             //     const btn = document.getElementById("pinBtn"+x[i].id);
             //     btn.setAttribute("value", "Unpin");
 
-            //     //x[i].isPinned.innerHTML = false;
+                //x[i].isPinned.innerHTML = false;
             // }
         })
 
