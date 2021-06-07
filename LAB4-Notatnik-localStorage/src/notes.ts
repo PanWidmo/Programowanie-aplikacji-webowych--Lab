@@ -3,7 +3,7 @@ import {IAppStorage} from './IAppStorage';
 export class Notes{
 
     notesFromLocalStorage(){
-        const tmp = new AppStorage();
+        const tmp = new AppStorage;
         const x = tmp.fetchDataFromLocalStorage();
 
         for(let i = 0; i < x.length; i++){
@@ -21,9 +21,13 @@ export class Notes{
         noteDeleteBtn.setAttribute("id", "deleteBtn"+x[i].id);
         const notePinBtn = document.createElement('input');
         notePinBtn.setAttribute("type", "button");
-        notePinBtn.setAttribute("value", "Pin");
+            if(x[i].isPinned === true){
+                notePinBtn.setAttribute("value", "Unpin");
+            }
+            else notePinBtn.setAttribute("value", "Pin");
         notePinBtn.setAttribute("id", "pinBtn"+x[i].id);
 
+        //delete button
         noteDeleteBtn.addEventListener('click', (ev:Event) => {
             const btnId = ((ev.target as Element).id).replace("deleteBtn",'');
             const notes2: IAppStorage[] = [];
@@ -37,67 +41,69 @@ export class Notes{
                     notes2.push(x);
                 }
             })
+
             if(a.length === 1){
                 localStorage.removeItem("note");
                 const notesDiv = document.getElementById('notes');
+                const notesDivPinned = document.getElementById('pinnedNotes');
                 notesDiv.innerHTML = "";
+                notesDivPinned.innerHTML = "";
             }
             else {
+                const notesDivPinned = document.getElementById('pinnedNotes');
+                notesDivPinned.innerHTML = "";
                 const notesDiv = document.getElementById('notes');
                 notesDiv.innerHTML = "";
-
                 localStorage.setItem("note",JSON.stringify(notes2));
                 this.notesFromLocalStorage();
             }
         })
 
+        //pin button
         notePinBtn.addEventListener('click', (ev:Event) => {
-
-            // wziete z deleteBtn
-            const btnId = ((ev.target as Element).id).replace("pinBtn",'');
-            const notes2: IAppStorage[] = [];
             const a = JSON.parse(localStorage.getItem("note"));
+            if(a[i].isPinned === true){
+                const space = document.getElementById('notes');
+                const noteId = document.getElementById("note" + x[i].id);
+                space.appendChild(noteId);
+                const btn = document.getElementById("pinBtn"+x[i].id);
+                btn.setAttribute("value", "Pin");
 
-            a.map((x:any) =>{
-                if(x.id == btnId){
-
-                }
-                else {
-                    notes2.push(x);
-                }
-            })
-            if(a.length === 1){
-                localStorage.removeItem("note");
-                const notesDiv = document.getElementById('notes');
-                notesDiv.innerHTML = "";
-            }
-            else {
-                const notesDiv = document.getElementById('notes');
-                notesDiv.innerHTML = "";
+                const a = JSON.parse(localStorage.getItem("note"));
+                const notes2: IAppStorage[] = [];
+                a.map((y:any) =>{
+                    if(y.id === x[i].id){
+                        y.isPinned = false;
+                        notes2.push(y);
+                    }
+                    else {
+                        notes2.push(y);
+                    }
+                })
 
                 localStorage.setItem("note",JSON.stringify(notes2));
-                this.notesFromLocalStorage();
             }
+            else {
+                const space = document.getElementById('pinnedNotes');
+                space.appendChild(noteBox);
+                const btn = document.getElementById("pinBtn"+x[i].id);
+                btn.setAttribute("value", "Unpin");
 
-            //old
-            // if(x[i].isPinned === true){
-            //     console.log("z pin do notes");
-            //     const space = document.getElementById('notes');
-            //     space.appendChild(noteBox);
-            //     const btn = document.getElementById("pinBtn"+x[i].id);
-            //     btn.setAttribute("value", "Pin");
+                const a = JSON.parse(localStorage.getItem("note"));
+                const notes2: IAppStorage[] = [];
+                a.map((y:any) =>{
+                    if(y.id === x[i].id){
+                        y.isPinned = true;
+                        notes2.push(y);
+                    }
+                    else {
+                        notes2.push(y);
+                    }
+                })
 
-                //x[i].isPinned.innerHTML = true;
-            // }
-            // else {
-            //     console.log("z notes do pin");
-            //     const space = document.getElementById('pinnedNotes');
-            //     space.appendChild(noteBox);
-            //     const btn = document.getElementById("pinBtn"+x[i].id);
-            //     btn.setAttribute("value", "Unpin");
+                localStorage.setItem("note",JSON.stringify(notes2));
 
-                //x[i].isPinned.innerHTML = false;
-            // }
+            }
         })
 
         //uzupelnienie szkieletu danymi
@@ -107,13 +113,24 @@ export class Notes{
         noteBox.style.borderColor = x[i].color;
 
         //wrzucenie szkieletu z danymi na strone
-        const space = document.getElementById('notes');
-        space.appendChild(noteBox);
-        noteBox.appendChild(noteBoxTitle);
-        noteBox.appendChild(noteBoxDescription);
-        noteBox.appendChild(noteBoxDate);
-        noteBox.appendChild(noteDeleteBtn);
-        noteBox.appendChild(notePinBtn);
+        if(x[i].isPinned === true){
+            const spacePinned = document.getElementById('pinnedNotes');
+            spacePinned.appendChild(noteBox);
+            noteBox.appendChild(noteBoxTitle);
+            noteBox.appendChild(noteBoxDescription);
+            noteBox.appendChild(noteBoxDate);
+            noteBox.appendChild(noteDeleteBtn);
+            noteBox.appendChild(notePinBtn);
+        }
+        else{
+            const space = document.getElementById('notes');
+            space.appendChild(noteBox);
+            noteBox.appendChild(noteBoxTitle);
+            noteBox.appendChild(noteBoxDescription);
+            noteBox.appendChild(noteBoxDate);
+            noteBox.appendChild(noteDeleteBtn);
+            noteBox.appendChild(notePinBtn);
+        }
 
         }
 

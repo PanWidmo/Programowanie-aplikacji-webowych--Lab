@@ -49,6 +49,9 @@ export class AppStorage{
             const divId = document.getElementById('notes');
             divId.innerHTML = "";
 
+            const divNotesPinnedId = document.getElementById('pinnedNotes');
+            divNotesPinnedId.innerHTML = "";
+
             const y = new Notes;
             y.notesFromLocalStorage();
 
