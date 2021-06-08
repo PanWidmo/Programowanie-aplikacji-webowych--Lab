@@ -10,6 +10,8 @@ export class Notes{
 
         //tworzenie szkieletu
         const noteBox = document.createElement('div');
+        const noteBoxTop = document.createElement('div');
+        noteBoxTop.className = 'noteBoxTopClass'
         noteBox.className = 'noteBoxClass'
         noteBox.setAttribute("id","note" + x[i].id);
         const noteBoxTitle = document.createElement('h1');
@@ -111,11 +113,14 @@ export class Notes{
         noteBoxDescription.innerHTML = x[i].description;
         noteBoxDate.innerHTML=x[i].date;
         noteBox.style.borderColor = x[i].color;
+        noteBoxTop.style.backgroundColor = x[i].color;
 
         //wrzucenie szkieletu z danymi na strone
         if(x[i].isPinned === true){
             const spacePinned = document.getElementById('pinnedNotes');
+                // spacePinned.appendChild(noteBoxTop);
             spacePinned.appendChild(noteBox);
+                noteBox.appendChild(noteBoxTop);
             noteBox.appendChild(noteBoxTitle);
             noteBox.appendChild(noteBoxDescription);
             noteBox.appendChild(noteBoxDate);
@@ -125,6 +130,7 @@ export class Notes{
         else{
             const space = document.getElementById('notes');
             space.appendChild(noteBox);
+            noteBox.appendChild(noteBoxTop);
             noteBox.appendChild(noteBoxTitle);
             noteBox.appendChild(noteBoxDescription);
             noteBox.appendChild(noteBoxDate);
