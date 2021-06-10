@@ -9,7 +9,7 @@ export class App {
 
     async fetchNotes(){
         const tmp = new Notes();
-        tmp.notesFromLocalStorage();
+        tmp.notesDisplay();
     }
 
     newNote(){

@@ -53,7 +53,7 @@ export class AppStorage{
             divNotesPinnedId.innerHTML = "";
 
             const y = new Notes;
-            y.notesFromLocalStorage();
+            y.notesDisplay();
 
             noteTitle.value="";
             noteDescription.value="";
