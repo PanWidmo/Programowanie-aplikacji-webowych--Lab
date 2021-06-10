@@ -6,3 +6,5 @@ export const firebaseConfig = {
     messagingSenderId: "511773634971",
     appId: "1:511773634971:web:126a889864d99b3243f13e"
   };
+
+export const firebaseModeOn: boolean = true;

@@ -1,12 +1,13 @@
 import {AppStorage} from './appStorage';
 import {IAppStorage} from './IAppStorage';
 import { AppFirebaseStorage } from './appFirebaseStorage';
+import { firebaseModeOn } from './config';
 export class Notes{
 
     async notesDisplay(){
-        const x=2;
-        if (x!=2){
-            //firebase-------------------------------------------------
+        if (firebaseModeOn === true){
+            //#region firebase
+            console.log("firebase");
             const tmp = new AppFirebaseStorage();
             const x = await tmp.getNotes();
 
@@ -141,11 +142,13 @@ export class Notes{
                     noteBox.appendChild(notePinBtn);
                 }
         }
+    }
 
-        }
+
 
         else{
         //localStorage--------------------------------------------------------
+        console.log("localStorage");
             const tmp = new AppStorage;
             const x = tmp.fetchDataFromLocalStorage();
 
