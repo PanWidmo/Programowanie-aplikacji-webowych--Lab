@@ -1,5 +1,7 @@
 import {IAppStorage} from "./IAppStorage";
 import {Notes} from "./Notes";
+import {AppFirebaseStorage} from './appFirebaseStorage';
+import {firebaseModeOn} from './config';
 export class AppStorage{
     notes: IAppStorage[] = [];
 
@@ -44,7 +46,14 @@ export class AppStorage{
             alert("Enter data!");
         }
         else {
+            if(firebaseModeOn === true){
+                const tmp = new AppFirebaseStorage();
+                tmp.addNote(object);
+            }
+            else{
+
             this.saveDataToLocalStorage(object);
+            }
 
             const divId = document.getElementById('notes');
             divId.innerHTML = "";

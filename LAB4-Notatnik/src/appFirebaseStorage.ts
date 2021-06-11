@@ -21,6 +21,7 @@ export class AppFirebaseStorage{
 
         async addNote(note:IAppStorage) {
             await this.db.collection('notatki').add(note);
+            console.log("dodano notatke");
         }
 
         async deleteNote(id: string){

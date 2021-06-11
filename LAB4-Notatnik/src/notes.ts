@@ -141,12 +141,13 @@ export class Notes{
                     noteBox.appendChild(noteDeleteBtn);
                     noteBox.appendChild(notePinBtn);
                 }
+            }
         }
-    }
-
+            //#endregion
 
 
         else{
+            //#region local storage
         //localStorage--------------------------------------------------------
         console.log("localStorage");
             const tmp = new AppStorage;
