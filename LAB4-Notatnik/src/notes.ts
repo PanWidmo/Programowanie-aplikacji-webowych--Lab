@@ -18,52 +18,60 @@ export class Notes{
                 const noteBoxTop = document.createElement('div');
                 noteBoxTop.className = 'noteBoxTopClass'
                 noteBox.className = 'noteBoxClass'
-                noteBox.setAttribute("id","note" + x[i].data.id);
+                noteBox.setAttribute("id","note" + x[i].id);
                 const noteBoxTitle = document.createElement('h1');
                 const noteBoxDescription = document.createElement('p');
                 const noteBoxDate = document.createElement('p');
                 const noteDeleteBtn = document.createElement('input');
                 noteDeleteBtn.setAttribute("type", "button")
                 noteDeleteBtn.setAttribute("value", "Remove");
-                noteDeleteBtn.setAttribute("id", "deleteBtn"+x[i].data.id);
+                noteDeleteBtn.setAttribute("id", "deleteBtn"+x[i].id);
                 const notePinBtn = document.createElement('input');
                 notePinBtn.setAttribute("type", "button");
                     if(x[i].data.isPinned === true){
                         notePinBtn.setAttribute("value", "Unpin");
                     }
                     else notePinBtn.setAttribute("value", "Pin");
-                notePinBtn.setAttribute("id", "pinBtn"+x[i].data.id);
+                notePinBtn.setAttribute("id", "pinBtn"+x[i].id);
 
                 //delete button
-                noteDeleteBtn.addEventListener('click', (ev:Event) => {
+                noteDeleteBtn.addEventListener('click', async (ev:Event) => {
+                    console.log("delete");
                     const btnId = ((ev.target as Element).id).replace("deleteBtn",'');
-                    const notes2: IAppStorage[] = [];
-                    const a = JSON.parse(localStorage.getItem("note"));
-
-                    a.map((x:any) =>{
-                        if(x.id == btnId){
-
-                        }
-                        else {
-                            notes2.push(x);
-                        }
-                    })
-
-                    if(a.length === 1){
-                        localStorage.removeItem("note");
+                    await tmp.deleteNote(btnId);
+                        //tu warunek jakis dodac
                         const notesDiv = document.getElementById('notes');
                         const notesDivPinned = document.getElementById('pinnedNotes');
                         notesDiv.innerHTML = "";
                         notesDivPinned.innerHTML = "";
-                    }
-                    else {
-                        const notesDivPinned = document.getElementById('pinnedNotes');
-                        notesDivPinned.innerHTML = "";
-                        const notesDiv = document.getElementById('notes');
-                        notesDiv.innerHTML = "";
-                        localStorage.setItem("note",JSON.stringify(notes2));
-                        this.notesDisplay();
-                    }
+                    this.notesDisplay();
+                    // const notes2: IAppStorage[] = [];
+                    // const a = JSON.parse(localStorage.getItem("note"));
+
+                    // a.map((x:any) =>{
+                    //     if(x.id == btnId){
+
+                    //     }
+                    //     else {
+                    //         notes2.push(x);
+                    //     }
+                    // })
+
+                    // if(a.length === 1){
+                    //     localStorage.removeItem("note");
+                    //     const notesDiv = document.getElementById('notes');
+                    //     const notesDivPinned = document.getElementById('pinnedNotes');
+                    //     notesDiv.innerHTML = "";
+                    //     notesDivPinned.innerHTML = "";
+                    // }
+                    // else {
+                    //     const notesDivPinned = document.getElementById('pinnedNotes');
+                    //     notesDivPinned.innerHTML = "";
+                    //     const notesDiv = document.getElementById('notes');
+                    //     notesDiv.innerHTML = "";
+                    //     localStorage.setItem("note",JSON.stringify(notes2));
+                    //     this.notesDisplay();
+                    // }
                 })
 
                 //pin button
@@ -148,8 +156,7 @@ export class Notes{
 
         else{
             //#region local storage
-        //localStorage--------------------------------------------------------
-        console.log("localStorage");
+            console.log("localStorage");
             const tmp = new AppStorage;
             const x = tmp.fetchDataFromLocalStorage();
 
