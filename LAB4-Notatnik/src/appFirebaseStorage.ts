@@ -27,7 +27,7 @@ export class AppFirebaseStorage{
     }
 
     async pinNote(id: string, note: IAppStorage){
-        await this.db.collection('notes').doc(id).update(note);
+        await this.db.collection('notatki').doc(id).update(note);
     }
 
     async getNote(id:string){

@@ -36,88 +36,41 @@ export class Notes{
 
                 //delete button
                 noteDeleteBtn.addEventListener('click', async (ev:Event) => {
-                    console.log("delete");
                     const btnId = ((ev.target as Element).id).replace("deleteBtn",'');
                     await tmp.deleteNote(btnId);
-                        //tu warunek jakis dodac
-                        const notesDiv = document.getElementById('notes');
-                        const notesDivPinned = document.getElementById('pinnedNotes');
-                        notesDiv.innerHTML = "";
-                        notesDivPinned.innerHTML = "";
+
+                    const notesDiv = document.getElementById('notes');
+                    const notesDivPinned = document.getElementById('pinnedNotes');
+                    notesDiv.innerHTML = "";
+                    notesDivPinned.innerHTML = "";
+
                     this.notesDisplay();
-                    // const notes2: IAppStorage[] = [];
-                    // const a = JSON.parse(localStorage.getItem("note"));
-
-                    // a.map((x:any) =>{
-                    //     if(x.id == btnId){
-
-                    //     }
-                    //     else {
-                    //         notes2.push(x);
-                    //     }
-                    // })
-
-                    // if(a.length === 1){
-                    //     localStorage.removeItem("note");
-                    //     const notesDiv = document.getElementById('notes');
-                    //     const notesDivPinned = document.getElementById('pinnedNotes');
-                    //     notesDiv.innerHTML = "";
-                    //     notesDivPinned.innerHTML = "";
-                    // }
-                    // else {
-                    //     const notesDivPinned = document.getElementById('pinnedNotes');
-                    //     notesDivPinned.innerHTML = "";
-                    //     const notesDiv = document.getElementById('notes');
-                    //     notesDiv.innerHTML = "";
-                    //     localStorage.setItem("note",JSON.stringify(notes2));
-                    //     this.notesDisplay();
-                    // }
                 })
 
                 //pin button
-                notePinBtn.addEventListener('click', (ev:Event) => {
-                    const a = JSON.parse(localStorage.getItem("note"));
-                    if(a[i].data.isPinned === true){
+                notePinBtn.addEventListener('click', async (ev:Event) => {
+                    const noteFirebaseId = ((ev.target as Element).id).replace('pinBtn', '');
+                    const noteFirebase = await tmp.getNote(noteFirebaseId);
+
+                    if(noteFirebase.isPinned === true){
+                        noteFirebase.isPinned = false;
+                        await tmp.pinNote(noteFirebaseId, noteFirebase);
+
                         const space = document.getElementById('notes');
-                        const noteId = document.getElementById("note" + x[i].data.id);
+                        const noteId = document.getElementById("note" + x[i].id);
                         space.appendChild(noteId);
-                        const btn = document.getElementById("pinBtn"+x[i].data.id);
+                        const btn = document.getElementById("pinBtn"+x[i].id);
                         btn.setAttribute("value", "Pin");
-
-                        const a = JSON.parse(localStorage.getItem("note"));
-                        const notes2: IAppStorage[] = [];
-                        a.map((y:any) =>{
-                            if(y.id === x[i].data.id){
-                                y.isPinned = false;
-                                notes2.push(y);
-                            }
-                            else {
-                                notes2.push(y);
-                            }
-                        })
-
-                        localStorage.setItem("note",JSON.stringify(notes2));
                     }
+
                     else {
+                        noteFirebase.isPinned = true;
+                        await tmp.pinNote(noteFirebaseId, noteFirebase);
+
                         const space = document.getElementById('pinnedNotes');
                         space.appendChild(noteBox);
-                        const btn = document.getElementById("pinBtn"+x[i].data.id);
+                        const btn = document.getElementById("pinBtn"+x[i].id);
                         btn.setAttribute("value", "Unpin");
-
-                        const a = JSON.parse(localStorage.getItem("note"));
-                        const notes2: IAppStorage[] = [];
-                        a.map((y:any) =>{
-                            if(y.id === x[i].data.id){
-                                y.isPinned = true;
-                                notes2.push(y);
-                            }
-                            else {
-                                notes2.push(y);
-                            }
-                        })
-
-                        localStorage.setItem("note",JSON.stringify(notes2));
-
                     }
                 })
 
