@@ -6,8 +6,10 @@
         "module": "commonjs",
         "target": "es6",
         "removeComments": true,
+        "experimentalDecorators": true,
+        "outDir": "./build"
     },
     "include": [
-        "src/**/*"
+        "**/*"
     ],
 }
