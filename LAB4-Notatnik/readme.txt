@@ -56,4 +56,4 @@ Jak uruchomić testy jednostkowe:
 PPM unitTests folder -> Open in Integrated Terminal -> npx jest
 
 Jak uruchomić test funkcjonalny:
-PPM puppeteer folder -> Open in Integrated Terminal -> tsc --OutDir build index.test.ts -> PPM puppeteer/build folder -> Open in Integrated Terminal -> node index.test.js
+PPM src folder -> Open in Integrated Terminal -> npm start -> PPM puppeteer folder -> Open in Integrated Terminal -> tsc --OutDir build index.test.ts -> PPM build folder -> Open in Integrated Terminal -> node index.test.js
